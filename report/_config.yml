@@ -1,0 +1,8 @@
+# Site settings
+title: A Jekyll Glossary
+description: A Jekyll-powered glossary built with a simple, aesthetic template.
+
+# Collections Configuration
+collections:
+  terms:
+    output: false # We don't need individual pages for each term, each entry in _terms will populate on a single page.
