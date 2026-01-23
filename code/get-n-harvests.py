@@ -1,3 +1,9 @@
+'''
+This code can be used to extract the number of harvest sources reported by data.gov 
+from the WBM snapshots of catalog.data.gov/harvest
+
+Last Modified: 1/23/2026
+'''
 import requests
 from bs4 import BeautifulSoup
 import re
@@ -71,7 +77,7 @@ def main():
     target_url = "https://catalog.data.gov/harvest/"
     start_year = 2023
     end_year = 2026
-    output_file = "datagov_harvest_counts_cdx.csv"
+    output_file = "../data/datagov_harvest_counts.csv"
     
     # 1. Get List of Snapshots via CDX
     snapshots = get_monthly_snapshots(target_url, start_year, end_year)

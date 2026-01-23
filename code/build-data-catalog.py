@@ -2,7 +2,7 @@ import requests
 import csv
 import time
 
-def fetch_datagov_inventory(output_file="datagov_inventory.csv", limit=None):
+def fetch_datagov_inventory(output_file="../data/datagov_inventory.csv", limit=None):
     base_url = "https://catalog.data.gov/api/3/action/package_search"
     # Cap the page size at 1000 or the user's limit, whichever is smaller
     rows_per_page = min(1000, limit) if limit else 1000

@@ -1,3 +1,19 @@
+'''
+This code can be used to extract information from data.gov using the CKAN API
+ it currently writes out the following information to a csv file from all datasets indexed in the Federal Data Catalog:
+    'Dataset Name'
+    'Data.gov Link' 
+    'Agency Data Link' 
+    'Metadata Created' 
+    'Metadata Updated' 
+    'Owning Agency' 
+    'Harvest Source'
+
+The script has resume capability in case of an interruption (dumping memory after each iteration to the csv and then using
+ the length of the CV to check against the count of the number of datasets returned by CKAN to restart the iterator if resume=True).
+
+Last Modified: 1/23/2026
+'''
 import requests
 import csv
 import time
