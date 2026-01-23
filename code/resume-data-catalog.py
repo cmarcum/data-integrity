@@ -33,7 +33,7 @@ def fetch_datagov_inventory(output_file="datagov_inventory.csv", resume=True):
         return
 
     # --- CSV SETUP ---
-    keys = ['Dataset Name', 'Data.gov Link', 'Agency Data Link', 'Metadata Created', 'Metadata Updated', 'Owning Agency']
+    keys = ['Dataset Name', 'Data.gov Link', 'Agency Data Link', 'Metadata Created', 'Metadata Updated', 'Owning Agency', 'Harvest Source']
     
     # Use 'a' (append) if resuming, 'w' (write/overwrite) if starting fresh
     mode = 'a' if (resume and file_exists) else 'w'
@@ -65,6 +65,8 @@ def fetch_datagov_inventory(output_file="datagov_inventory.csv", resume=True):
                     # CKAN Field Mappings
                     slug = item.get('name', '')
                     org_info = item.get('organization')
+                    item_extras = item.get('extras', [])
+                    harvest_source = next((x['value'] for x in item_extras if x['key'] == 'harvest_source_title'), 'N/A')
                     
                     batch.append({
                         'Dataset Name': item.get('title', 'N/A'),
@@ -72,7 +74,8 @@ def fetch_datagov_inventory(output_file="datagov_inventory.csv", resume=True):
                         'Agency Data Link': item.get('url') or (item.get('resources')[0].get('url') if item.get('resources') else "N/A"),
                         'Metadata Created': item.get('metadata_created', 'N/A'),
                         'Metadata Updated': item.get('metadata_modified', 'N/A'),
-                        'Owning Agency': org_info.get('title', 'N/A') if org_info else 'N/A'
+                        'Owning Agency': org_info.get('title', 'N/A') if org_info else 'N/A',
+                        'Harvest Source': harvest_source
                     })
                 
                 writer.writerows(batch)
