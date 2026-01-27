@@ -9,10 +9,12 @@ This code can be used to extract information from data.gov using the CKAN API
     'Owning Agency' 
     'Harvest Source'
 
-The script has resume capability in case of an interruption (dumping memory after each iteration to the csv and then using
- the length of the CV to check against the count of the number of datasets returned by CKAN to restart the iterator if resume=True).
+The script has resume capability in case of an interruption.
 
-Last Modified: 1/23/2026
+While the script is "headless" and uses the public, non-authenticated API gateway, it can easily be modified to use
+ the authenticated gateway with an API key instead. Please refer to the repository README file for instructions on how to modify these scripts for using the authenticated gateway.
+ 
+Last Modified: 1/27/2026
 '''
 import requests
 import csv

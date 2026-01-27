@@ -12,7 +12,10 @@ This code can be used to extract information from data.gov using the CKAN API
 
 The script has resume capability in case of an interruption.
 
-Last Modified: 1/25/2026
+While the script is "headless" and uses the public, non-authenticated API gateway, it can easily be modified to use
+ the authenticated gateway with an API key instead. Please refer to the repository README file for instructions on how to modify these scripts for using the authenticated gateway.
+ 
+Last Modified: 1/27/2026
 '''
 import requests
 import csv
@@ -69,7 +72,7 @@ def fetch_datagov_inventory(output_file="datagov_collections_inventory.csv", res
                 'fq': 'collection_package_id:*', # Updated filter query
                 'rows': rows_per_page,
                 'start': start,
-                'sort': 'metadata_created asc' # Mandatory for resume to work correctly
+                'sort': 'metadata_created asc'
             }
             
             try:
@@ -99,7 +102,7 @@ def fetch_datagov_inventory(output_file="datagov_collections_inventory.csv", res
                 f.flush() # Force write to disk in case of crash
                 
                 start += rows_per_page
-                time.sleep(1) # Slightly longer delay to avoid aggressive rate limiting
+                time.sleep(1) # Slightly longer delay to avoid aggressive rate limiting (can change if using api)
                 
             except Exception as e:
                 print(f"\nINTERRUPTION at record {start}: {e}")

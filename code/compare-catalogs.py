@@ -1,3 +1,12 @@
+'''
+This script takes takes two snapshots of comprehensive data inventories (CDI) from a US
+ Federal agency and compares them to return A \ B. Set A is presumed to be the snapshot at time 1 and set B at time 2. The script outputs the difference, giving the datasets that were removed from the CDI at time 2. Obviously, if the order of the sets is changed at input, the output provides a list of newly added datasets by time 2.
+
+From the command line, this can be run with:
+ $ python compare-catalogs.py A.json B.json
+
+Last Modified: 1/23/2026
+'''
 from __future__ import annotations
 
 import argparse
