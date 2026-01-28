@@ -2,7 +2,10 @@
 This code can be used to extract the number of harvest sources reported by data.gov 
 from the WBM snapshots of catalog.data.gov/harvest
 
-Last Modified: 1/23/2026
+The code attempts to get the snapshot taken closest to the first of the month for 
+ each month between the start year and end year (see lines 81-82)
+
+Last Modified: 1/28/2026
 '''
 import requests
 from bs4 import BeautifulSoup
@@ -55,7 +58,7 @@ def scrape_harvest_count(timestamp, original_url):
     archive_url = f"https://web.archive.org/web/{timestamp}/{original_url}"
     
     try:
-        response = requests.get(archive_url, timeout=20)
+        response = requests.get(archive_url, timeout=120)
         if response.status_code != 200:
             return "Failed to load"
 
@@ -77,7 +80,7 @@ def main():
     target_url = "https://catalog.data.gov/harvest/"
     start_year = 2023
     end_year = 2026
-    output_file = "../data/datagov_harvest_counts.csv"
+    output_file = "../data/datagov_harvest_counts-01282026.csv"
     
     # 1. Get List of Snapshots via CDX
     snapshots = get_monthly_snapshots(target_url, start_year, end_year)
