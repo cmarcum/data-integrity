@@ -1,0 +1,19 @@
+/* Custom tweaks for report title page and content */
+
+.main-content h1:first-of-type {
+  margin-top: 0.5rem;
+}
+
+/* Make glossary headings slightly tighter */
+.main-content h3 {
+  margin-top: 1.25rem;
+}
+
+/* Optional: bibliography styling */
+.csl-entry {
+  margin-bottom: 0.75rem;
+}
+.csl-left-margin {
+  font-weight: 600;
+  margin-right: 0.5rem;
+}

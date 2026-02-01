@@ -1,8 +1,52 @@
-# Site settings
-title: A Jekyll Glossary
-description: A Jekyll-powered glossary built with a simple, aesthetic template.
+title: "Report"
+description: "Multi-page Jekyll report with sidebar nav, glossary, citations, and PDF build support."
+theme: just-the-docs/just-the-docs
 
-# Collections Configuration
+# If this site is published from a subpath (e.g., https://USER.github.io/REPO/),
+# set baseurl accordingly (example: "/REPO"). For a custom domain/root, leave blank.
+baseurl: ""
+url: ""
+
+# Enable search (Just the Docs)
+search_enabled: true
+
+# Collections
 collections:
+  chapters:
+    output: true
+    permalink: /:collection/:name/
   terms:
-    output: false # We don't need individual pages for each term, each entry in _terms will populate on a single page.
+    output: false
+
+# Default front matter for chapters
+defaults:
+  - scope:
+      path: ""
+      type: chapters
+    values:
+      layout: default
+
+# Just the Docs navigation behavior
+aux_links:
+  "Repository":
+    - "https://github.com/"
+
+# Markdown settings
+markdown: kramdown
+kramdown:
+  input: GFM
+
+plugins:
+  - jekyll-remote-theme
+  - jekyll-scholar
+
+# jekyll-scholar settings
+scholar:
+  style: apa
+  locale: en
+  sort_by: author
+  order: ascending
+  source: ./_bibliography
+  bibliography: references.bib
+  bibliography_template: bibliography
+  replace_strings: true
