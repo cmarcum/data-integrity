@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: default
 title: "Report Title"
 permalink: /
 nav_exclude: true

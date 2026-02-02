@@ -1,10 +1,10 @@
 ---
-layout: default
-title: Federal Data Integrity Project Glossary
+layout: glossary
+title: Glossary
 ---
 
 {% comment %}
-  1. Get all mds from the 'terms' collection and sort them alphnumerically by the 'term' variable.
+  1. Get all mds from the 'terms' collection and sort them alpha-numerically by the 'term' variable.
 {% endcomment %}
 {% assign sorted_terms = site.terms | sort: "term" %}
 
@@ -17,7 +17,7 @@ title: Federal Data Integrity Project Glossary
 <div class="container" id="top">
   <header>
     <h1>{{ page.title }}</h1>
-    <p>A selected list of terms and definitions used in this project. When feasible, term definitions were drawn from U.S. federal government sources as federal definitions can sometimes deviate from concensus-based definitions in standard sources. Additional general resources for terms related to this project include the [Open Data Handbook Glossary](https://opendatahandbook.org/glossary/en/) and the [Turing Way Glossary](https://book.the-turing-way.org/afterword/glossary/).</p>
+    {{ "A selected list of terms and definitions used in this project. When feasible, term definitions were drawn from U.S. federal government sources as federal definitions can sometimes deviate from concensus-based definitions in standard sources. Additional general resources for terms related to this project include the [Open Data Handbook Glossary](https://opendatahandbook.org/glossary/en/) and the [Turing Way Glossary](https://book.the-turing-way.org/afterword/glossary/)." | markdownify }}
   </header>
 
   <nav class="alpha-nav">

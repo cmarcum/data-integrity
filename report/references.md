@@ -1,8 +1,8 @@
 ---
 title: References
 nav_order: 95
+permalink: /references/
+layout: default
 ---
 
-This page renders the bibliography used for inline citations.
-
-{% bibliography %}
+{% bibliography --all %}

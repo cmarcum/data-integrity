@@ -1,6 +1,8 @@
 title: "Report"
 description: "Multi-page Jekyll report with sidebar nav, glossary, citations, and PDF build support."
-theme: just-the-docs/just-the-docs
+theme: just-the-docs
+
+# May need to replace theme:just-the-docs to remote_theme: just-the-docs for github
 
 # If this site is published from a subpath (e.g., https://USER.github.io/REPO/),
 # set baseurl accordingly (example: "/REPO"). For a custom domain/root, leave blank.
@@ -17,6 +19,13 @@ collections:
     permalink: /:collection/:name/
   terms:
     output: false
+    
+just_the_docs:
+  collections:
+    chapters:
+      name: Report
+      nav_exclude: false
+      nav_fold: false
 
 # Default front matter for chapters
 defaults:
@@ -37,7 +46,7 @@ kramdown:
   input: GFM
 
 plugins:
-  - jekyll-remote-theme
+#  - jekyll-remote-theme
   - jekyll-scholar
 
 # jekyll-scholar settings
@@ -46,7 +55,8 @@ scholar:
   locale: en
   sort_by: author
   order: ascending
-  source: ./_bibliography
+  source: _bibliography
   bibliography: references.bib
-  bibliography_template: bibliography
   replace_strings: true
+  details_link: /references/
+  details_link_class: reference-link
