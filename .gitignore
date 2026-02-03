@@ -3,3 +3,5 @@
 HISTORY.txt
 README.txt
 wip/
+.jekyll-cache/
+Gemfile.lock

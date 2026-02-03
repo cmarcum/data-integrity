@@ -1,11 +1,11 @@
 '''
-This script takes takes two snapshots of comprehensive data inventories (CDI) from a US
+This script takes two snapshots of comprehensive data inventories (CDI) from a US
  Federal agency and compares them to return A \ B. Set A is presumed to be the snapshot at time 1 and set B at time 2. The script outputs the difference, giving the datasets that were removed from the CDI at time 2. Obviously, if the order of the sets is changed at input, the output provides a list of newly added datasets by time 2.
 
 From the command line, this can be run with:
  $ python compare-catalogs.py A.json B.json
 
-Last Modified: 1/23/2026
+Last Modified: 2/2/2026
 '''
 from __future__ import annotations
 
@@ -29,10 +29,6 @@ def load_json(path: str) -> Any:
 def extract_dataset_list(obj: Any) -> List[Dict[str, Any]]:
     """
     Return the list of dataset dicts from a POD-style JSON object.
-    Supports:
-      - {"dataset": [ ... ]}
-      - [ ... ] (list of dataset dicts)
-      - fallback: recursive search for a key named "dataset" containing a list
     """
     # Common case: top-level dict with "dataset" list
     if isinstance(obj, dict) and isinstance(obj.get("dataset"), list):
@@ -69,10 +65,7 @@ def extract_dataset_list(obj: Any) -> List[Dict[str, Any]]:
 
 def normalize_title(title: str) -> str:
     """
-    Normalize titles to reduce trivial mismatches:
-    - trim
-    - collapse internal whitespace
-    - casefold (stronger than lower() for unicode)
+    Clean up dataset names
     """
     collapsed = re.sub(r"\s+", " ", title.strip())
     return collapsed.casefold()
