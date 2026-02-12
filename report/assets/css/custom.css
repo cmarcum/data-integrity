@@ -1,64 +1,66 @@
-/* Custom tweaks for report title page and content */
+/* =========================================================
+   Just the Docs layout: maximize main content width
+   - Small padding
+   - No readability max-width cap
+   - Sidebar takes a fixed/clamped width; main fills the rest
+   ========================================================= */
 
-.main-content h1:first-of-type {
-  margin-top: 0.5rem;
+/* ---- Core layout variables ---- */
+:root{
+  /* Sidebar width (adjust if desired) */
+  --nav-width: clamp(200px, 16vw, 280px);
+
+  /* Minimal padding around main text */
+  --content-pad-x: 1.0rem;
+  --content-pad-y: 1.0rem;
 }
 
-/* Make glossary headings slightly tighter */
-.main-content h3 {
-  margin-top: 1.25rem;
-}
+/* ---- Headings / minor typography tweaks (keep yours) ---- */
+.main-content h1:first-of-type { margin-top: 0.5rem; }
+.main-content h3 { margin-top: 1.25rem; }
 
-/* Optional: bibliography styling */
-.csl-entry {
-  margin-bottom: 0.75rem;
-}
-.csl-left-margin {
-  font-weight: 600;
-  margin-right: 0.5rem;
-}
+/* Optional: bibliography styling (keep yours) */
+.csl-entry { margin-bottom: 0.75rem; }
+.csl-left-margin { font-weight: 600; margin-right: 0.5rem; }
 
-/* Allow sidebar to be toggled on desktop */
-.side-bar {
+/* ---- Sidebar behavior ---- */
+.side-bar{
+  width: var(--nav-width) !important;
+  min-width: var(--nav-width) !important;
+  left: 0 !important;
   transition: transform 0.25s ease;
 }
 
 /* Hidden state (used by the built-in toggle JS) */
-.side-bar.hidden {
+.side-bar.hidden{
   transform: translateX(-100%);
 }
 
-/* When sidebar is hidden, reclaim space */
-.side-bar.hidden + .main-content-wrap {
+/* ---- Main layout: no big gutter, fill available space ---- */
+/* On desktop, Just the Docs offsets the main area with margin-left.
+   We set that explicitly to match the sidebar width. */
+@media (min-width: 50rem){
+  .side-bar + .main,
+  .side-bar + .main-content-wrap{
+    margin-left: var(--nav-width) !important;
+    width: auto !important;       /* let it naturally fill remaining space */
+    max-width: none !important;   /* remove theme caps */
+  }
+
+  .main{
+    max-width: none !important;   /* remove theme cap (often 50rem) */
+  }
+}
+
+/* When sidebar is hidden, reclaim full width */
+.side-bar.hidden + .main,
+.side-bar.hidden + .main-content-wrap{
   margin-left: 0 !important;
   width: 100% !important;
-}
-
-/* Sidebar width */
-/* =========================================
-   Just the Docs: sidebar <= 20% and no squish
-   ========================================= */
-
-:root{
-  --nav: clamp(220px, 20vw, 360px);
-}
-
-/* Sidebar width */
-.side-bar{
-  width: var(--nav) !important;
-  min-width: var(--nav) !important;
-  left: 0 !important; /* "snap" to left edge if positioned */
-}
-
-/* Content column wrappers (cover multiple JtD versions) */
-.main,
-.main-content-wrap{
-/*  margin-left: var(--nav) !important; */
-  width: calc(100% - var(--nav)) !important;
   max-width: none !important;
 }
 
-/* Remove theme readability caps wherever they might be applied */
+/* Remove theme “reading width” caps wherever they appear */
 .main-content,
 .page-content,
 .content{
@@ -66,19 +68,34 @@
   width: 100% !important;
 }
 
-/* Mobile: stack */
-@media (max-width: 900px){
+/* Minimal padding so content uses the window */
+.main-content,
+.page-content{
+  padding-left: var(--content-pad-x) !important;
+  padding-right: var(--content-pad-x) !important;
+  padding-top: var(--content-pad-y) !important;
+  padding-bottom: var(--content-pad-y) !important;
+}
+
+/* ---- Mobile / narrow screens: stack naturally ---- */
+@media (max-width: 50rem){
+  .side-bar{
+    width: auto !important;
+    min-width: 0 !important;
+  }
+
   .main,
   .main-content-wrap{
     margin-left: 0 !important;
     width: 100% !important;
+    max-width: none !important;
   }
 }
 
-/* ================================
-   Glossary-only styles
-   Scoped for Just the Docs
-   ================================ */
+/* =========================================================
+   Glossary-only styles (keep scoped; unchanged except
+   reducing outer margin/padding a touch to match “dense” layout)
+   ========================================================= */
 
 .glossary-wrap {
   --bg-color: #f8f9fa;
@@ -92,18 +109,16 @@
   font-family: 'Inter', 'Roboto', 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.7;
   color: var(--text-color);
-}
-
-/* Smooth scrolling only inside glossary */
-.glossary-wrap {
   scroll-behavior: smooth;
 }
 
 /* Main glossary container */
 .glossary-wrap .container {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 0 1rem;
+  max-width: none !important;
+  width: 100%;
+  margin: 0;
+  padding-left: var(--content-pad-x);
+  padding-right: var(--content-pad-x);
 }
 
 /* Glossary header */
@@ -131,7 +146,7 @@
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   padding: 0.75rem 0;
-  z-index: 2; /* below Just the Docs header */
+  z-index: 2;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
@@ -152,9 +167,7 @@
 }
 
 /* Glossary sections */
-.glossary-wrap .glossary-section {
-  margin-bottom: 3rem;
-}
+.glossary-wrap .glossary-section { margin-bottom: 3rem; }
 
 .glossary-wrap .glossary-section h2 {
   font-size: 2.5rem;
@@ -168,22 +181,20 @@
 
 /* Definition list */
 .glossary-wrap dl {
-  margin: 0;
+  display: grid;
+  grid-template-columns: 220px 1fr; /* term column | definition column */
+  column-gap: 1.5rem;
 }
 
 .glossary-wrap dt {
-  font-size: 1.2rem;
   font-weight: 600;
-  color: var(--heading-color);
-  margin-top: 1.5rem;
-  scroll-margin-top: 80px;
+  margin: 0;
 }
 
 .glossary-wrap dd {
-  margin-left: 0;
-  padding-left: 1rem;
-  border-left: 3px solid var(--border-color);
-  color: #495057;
+  margin: 0 0 1rem 0;
+  padding-left: 1rem;             
+  border-left: 2px solid var(--border-color);
 }
 
 /* Footer + utilities */
@@ -235,6 +246,4 @@
   border-color: var(--accent-color);
 }
 
-.glossary-wrap .btn-primary:hover {
-  opacity: 0.9;
-}
+.glossary-wrap .btn-primary:hover { opacity: 0.9; }

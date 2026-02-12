@@ -1,6 +1,7 @@
 ---
 layout: glossary
 title: Glossary
+nav_order: 1000
 ---
 
 {% comment %}
