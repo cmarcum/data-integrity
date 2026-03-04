@@ -1,55 +1,36 @@
-title: "Report"
-description: "Multi-page Jekyll report with sidebar nav, glossary, citations, and PDF build support."
+title: Index
+description: The Integrity of Federal Data
+author: Christopher Steven Marcum
 theme: just-the-docs
-
-# May need to replace theme:just-the-docs to remote_theme: just-the-docs for github
-
-# If this site is published from a subpath (e.g., https://USER.github.io/REPO/),
-# set baseurl accordingly (example: "/REPO"). For a custom domain/root, leave blank.
-baseurl: ""
-url: ""
-
-# Enable search (Just the Docs)
+baseurl: ''
+url: ''
 search_enabled: true
-
-# Collections
 collections:
   chapters:
     output: true
     permalink: /:collection/:name/
   terms:
     output: false
-    
 just_the_docs:
   collections:
     chapters:
       name: Report
       nav_exclude: false
       nav_fold: false
-
-# Default front matter for chapters
 defaults:
-  - scope:
-      path: ""
-      type: chapters
-    values:
-      layout: default
-
-# Just the Docs navigation behavior
+- scope:
+    path: ''
+    type: chapters
+  values:
+    layout: chapter
 aux_links:
-  "Repository":
-    - "https://github.com/"
-
-# Markdown settings
+  Repository:
+  - http://www.github.com/cmarcum/data-integrity/
 markdown: kramdown
 kramdown:
   input: GFM
-
 plugins:
-#  - jekyll-remote-theme
-  - jekyll-scholar
-
-# jekyll-scholar settings
+- jekyll-scholar
 scholar:
   style: apa
   locale: en
@@ -60,3 +41,4 @@ scholar:
   replace_strings: true
   details_link: /references/
   details_link_class: reference-link
+  bibliography_template: bib

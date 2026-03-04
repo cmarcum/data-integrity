@@ -7,7 +7,7 @@ This script evaluates whether a search term could be found on a particular snaps
  The script takes three arguments "keyword", "--pages", and "--date".
 
 From the command line, this can be run with:
- $ python find-harvest-wbm.py "census" --pages 44 --date "20250121"
+ $ python find-harvest-wbm.py "usaid" --pages 44 --date "20231201"
 
 Last Modified: 2/2/2026
 '''
@@ -17,7 +17,7 @@ import argparse
 import sys
 
 def search_wayback_refined(search_term, total_pages, target_date="20240121"):
-    base_url = "https://catalog.data.gov/harvest/"
+    base_url = "https://catalog.data.gov/harvest/?organization_type=Federal+Government"
     availability_api = "https://archive.org/wayback/available"
     
     session = requests.Session()
@@ -29,7 +29,10 @@ def search_wayback_refined(search_term, total_pages, target_date="20240121"):
     print(f"Starting search for '{search_term}' up to {total_pages} pages...")
 
     for i in range(1, total_pages + 1):
-        current_url = f"{base_url}?page={i}" if i > 1 else base_url
+        if i > 1:
+            current_url = f"{base_url}&page={i}" 
+        else:
+            current_url = base_url
         print(f"Checking Page {i} ({current_url})...", end=" ", flush=True)
         
         params = {'url': current_url, 'timestamp': target_date}
@@ -57,6 +60,7 @@ def search_wayback_refined(search_term, total_pages, target_date="20240121"):
 
                 if search_term in content:
                     print("\n[!!! MATCH FOUND !!!]")
+                    break
                 else:
                     print(f"(No '{search_term}' in {len(content)} bytes)")
             else:

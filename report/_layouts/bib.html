@@ -1,0 +1,65 @@
+{%- assign ref = reference -%}
+
+{%- comment -%}
+Linkify URL in-place inside the rendered reference (prevents duplicates).
+{%- endcomment -%}
+{%- if entry.url and entry.url != "" -%}
+  {%- capture url_link -%}<a href="{{ entry.url }}" target="_blank" rel="noopener">{{ entry.url }}</a>{%- endcapture -%}
+  {%- if ref contains entry.url -%}
+    {%- assign ref = ref | replace: entry.url, url_link -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- comment -%}
+Linkify DOI in-place (handles either raw DOI or https://doi.org/<doi> appearing in reference).
+{%- endcomment -%}
+{%- if entry.doi and entry.doi != "" -%}
+  {%- assign doi_val = entry.doi | strip -%}
+  {%- if doi_val contains "http://" or doi_val contains "https://" -%}
+    {%- assign doi_href = doi_val -%}
+    {%- assign doi_display = doi_val -%}
+  {%- else -%}
+    {%- assign doi_href = "https://doi.org/" | append: doi_val -%}
+    {%- assign doi_display = doi_val -%}
+  {%- endif -%}
+
+  {%- capture doi_link -%}<a href="{{ doi_href }}" target="_blank" rel="noopener">{{ doi_display }}</a>{%- endcapture -%}
+  {%- capture doi_url -%}https://doi.org/{{ doi_val }}{%- endcapture -%}
+
+  {%- if ref contains doi_url -%}
+    {%- assign ref = ref | replace: doi_url, doi_link -%}
+  {%- elsif ref contains doi_val -%}
+    {%- assign ref = ref | replace: doi_val, doi_link -%}
+  {%- endif -%}
+{%- endif -%}
+
+{{ ref }}
+
+{%- comment -%}
+Fallback: ONLY append if the reference still doesn't contain the URL/DOI.
+Use `unless` (Liquid-native) to avoid buggy boolean comparisons.
+{%- endcomment -%}
+
+{%- if entry.url and entry.url != "" -%}
+  {%- unless ref contains entry.url -%}
+    <span class="bib-url">
+      <a href="{{ entry.url }}" target="_blank" rel="noopener">{{ entry.url }}</a>
+    </span>
+  {%- endunless -%}
+{%- endif -%}
+
+{%- if entry.doi and entry.doi != "" -%}
+  {%- assign doi_val = entry.doi | strip -%}
+  {%- capture doi_url -%}https://doi.org/{{ doi_val }}{%- endcapture -%}
+  {%- if doi_val contains "http://" or doi_val contains "https://" -%}
+    {%- assign doi_href = doi_val -%}
+  {%- else -%}
+    {%- assign doi_href = "https://doi.org/" | append: doi_val -%}
+  {%- endif -%}
+
+  {%- unless ref contains doi_url or ref contains doi_val -%}
+    <span class="bib-doi">
+      <a href="{{ doi_href }}" target="_blank" rel="noopener">{{ doi_val }}</a>
+    </span>
+  {%- endunless -%}
+{%- endif -%}

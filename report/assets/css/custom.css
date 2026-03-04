@@ -15,6 +15,18 @@
   --content-pad-y: 1.0rem;
 }
 
+/* Standard image widths */
+.img-small  { max-width: 300px; }
+.img-medium { max-width: 600px; }
+.img-large  { max-width: 900px; }
+.img-full   { width: 100%; }
+
+/* Center images cleanly */
+.img-center {
+  display: block;
+  margin: 1.5rem auto;
+}
+
 /* ---- Headings / minor typography tweaks (keep yours) ---- */
 .main-content h1:first-of-type { margin-top: 0.5rem; }
 .main-content h3 { margin-top: 1.25rem; }
@@ -36,6 +48,67 @@
   transform: translateX(-100%);
 }
 
+/* ---- Cover page ---- */
+.report-cover {
+  /* true full-bleed on screen */
+  width: 100vw;
+  height: 100vh;                 /* avoid min-height + padding overflow */
+  margin-left: calc(-50vw + 50%);
+  padding: 0;                    /* padding on inner panel instead */
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;              /* prevents accidental spill/scrollbars */
+  box-sizing: border-box;
+}
+
+/* background image + overlay (NO fixed positioning) */
+.report-cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+    url("../images/cover.png") center / cover no-repeat;
+
+  z-index: -1;
+}
+
+/* title panel */
+.report-cover__panel {
+  width: min(900px, 92vw);
+  padding: clamp(24px, 4vw, 56px);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.25);
+  backdrop-filter: blur(6px);
+}
+
+/* Make cover panel "glass" and readable on top of the dark cover overlay */
+.report-cover__panel {
+  border: 1px solid rgba(255,255,255,0.22);
+  color: #fff;
+}
+.report-cover__panel a { color: #fff; text-decoration: underline; }
+.report-cover__panel strong { color: #fff; }
+
+
+/* Optional: hide sidebar + header chrome ONLY on the cover page */
+body.cover-page .side-bar,
+body.cover-page .breadcrumb-nav,
+body.cover-page .aux-nav {
+  display: none !important;
+}
+
+body.cover-page .main {
+  margin-left: 0 !important;
+}
+
+body.cover-page .main-content-wrap {
+  padding-left: 0 !important;
+}
+
 /* ---- Main layout: no big gutter, fill available space ---- */
 /* On desktop, Just the Docs offsets the main area with margin-left.
    We set that explicitly to match the sidebar width. */
@@ -50,6 +123,131 @@
   .main{
     max-width: none !important;   /* remove theme cap (often 50rem) */
   }
+}
+
+/* On-screen PDF page should not look like the site */
+.pdf-page .pdf-main {
+  padding: 0;
+}
+
+.pdf-page .pdf-main-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* Page breaks */
+.page-break {
+  height: 0;
+}
+
+/* Cover (screen) */
+.pdf-cover {
+  width: 100vw;
+  height: 100vh;                 /* avoid min-height overflow */
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%); /* full-bleed even inside centered content */
+  padding: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  background: url("../images/cover.png") center / cover no-repeat;
+}
+
+.pdf-cover__content {
+  max-width: 700px;
+  padding: 8vh 6vw;
+}
+
+.pdf-cover__rule {
+  height: 1px;
+  width: min(520px, 70vw);
+  margin: 16px auto;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.pdf-subtitle { margin-top: 1rem; font-size: 2.5rem; }
+.pdf-author, .pdf-date { margin-top: 0.75rem; opacity: 0.95; font-size: 1.5rem; }
+
+/* Print rules *//* Print rules */
+/* Print rules */
+@media print {
+  /* A4 with 0.75in margins on all pages EXCEPT the first (cover) page */
+  @page {
+    size: A4;
+    margin: 0.75in;
+  }
+  @page :first {
+    margin: 0;
+  }
+
+  /* Hide site chrome */
+  .side-bar, .site-header, .nav-list, .site-footer, .breadcrumb-nav, .aux-nav { display: none !important; }
+
+  /* Let @page margins control layout; remove any wrapper padding/centering */
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .pdf-page .pdf-main,
+  .pdf-page .pdf-main-content {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+    width: auto !important;
+  }
+
+  /* Ensure the cover truly occupies the first printed page */
+  .pdf-cover {
+    width: 210mm !important;
+    height: 297mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+    box-sizing: border-box;
+    overflow: hidden;
+    background: url("../images/cover.png") center / cover no-repeat !important;
+  }
+
+  /* Make cover text visible even if background graphics are disabled */
+  .pdf-cover__content {
+    color: #111 !important;
+    background: rgba(255,255,255,0.78) !important;
+    border-radius: 12px;
+    padding: 18mm 16mm !important;
+  }
+  .pdf-cover__rule { background: rgba(0,0,0,0.25) !important; }
+
+  /* Force page breaks where the template inserts them */
+  .page-break {
+    display: block;
+    break-after: page;
+    page-break-after: always;
+  }
+
+  /* Keep TOC together */
+  .pdf-toc-page {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .figcaption,
+  p.figcaption {
+    color: #111 !important;
+    margin-top: -0.5rem;
+    margin-bottom: 0.9rem;
+    font-size: 10.5pt;
+  }
+
+  /* Remove extra top margin on page-start headings */
+  .pdf-main-content h1 { margin-top: 0; }
 }
 
 /* When sidebar is hidden, reclaim full width */
@@ -246,4 +444,45 @@
   border-color: var(--accent-color);
 }
 
+/* Glossary: offset anchor jumps so the term appears a few lines lower */
+@media screen {
+  /* Tune this: larger = more “space above” the targeted term */
+  :root { --glossary-anchor-offset: 5rem; }
+
+  /* Term slugs (dt ids) */
+  .glossary-wrap dt:target {
+    scroll-margin-top: var(--glossary-anchor-offset);
+  }
+
+  /* A/B/C section links from the alpha nav */
+  .glossary-wrap .glossary-section:target {
+    scroll-margin-top: var(--glossary-anchor-offset);
+  }
+}
+
 .glossary-wrap .btn-primary:hover { opacity: 0.9; }
+
+
+/* =========================================================
+   Figure captions (screen + print)
+   Usage (recommended):
+     ![Alt text](/path/to/img.png){: .img-center }
+     Figure 1. Caption text.{: .figcaption }
+   ========================================================= */
+.figcaption,
+p.figcaption {
+  display: block;
+  margin: -0.75rem auto 1.5rem auto;
+  max-width: 900px;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  color: #4b5563;
+  text-align: center;
+}
+
+
+/* Chapter title injected by layout: chapter */
+.chapter-title {
+  margin-top: 0.5rem;
+  margin-bottom: 1.25rem;
+}

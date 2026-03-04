@@ -1,17 +1,17 @@
 ---
-layout: default
-title: "Report Title"
+layout: cover
+title: "The Integrity of Federal Data"
+author: "Christopher Steven Marcum"
 permalink: /
 nav_exclude: true
 search_exclude: true
 ---
 
-# Report Title
-
+# {{ page.title }}
 **Subtitle (optional)**
 
-**Author:** Your Name  
-**Organization:** Your Organization  
+**Author:** Christopher Steven Marcum, Ph.D.  
+**Organization:** CSM Advising LLC 
 **Date:** {{ "now" | date: "%B %d, %Y" }}  
 **Version:** 0.1
 
