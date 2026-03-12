@@ -2,8 +2,8 @@ title: Index
 description: The Integrity of Federal Data
 author: Christopher Steven Marcum
 theme: just-the-docs
-baseurl: ''
-url: ''
+baseurl: '/data-integrity'
+url: 'https://www.chrismarcum.com'
 search_enabled: true
 collections:
   chapters:
