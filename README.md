@@ -3,9 +3,9 @@
 
 # Scripts for Data.gov
 
-The scripts in this repository that access data from Data.gov's CKAN API were written to use the public, unauthenticated API
-hosted at: [https://catalog.data.gov/api/3/action/](https://catalog.data.gov/api/3/action/). This was done intentionally
-to maximize public accessibility and ease-of-use. 
+The scripts in this repository that access data from Data.gov's CKAN API were written to use the either the public, unauthenticated API
+hosted at [https://catalog.data.gov/api/3/action/](https://catalog.data.gov/api/3/action/) or the api-key authenticated version which has a different baseurl: [https://api.gsa.gov/technology/datagov/v3/action/package_search?api_key=DEMO_KEY](https://api.gsa.gov/technology/datagov/v3/action/package_search?api_key=DEMO_KEY). This was done intentionally
+to maximize public accessibility and ease-of-use.
 
 For many use cases these scripts work just fine using the unauthenticated API. However, some endpoints (notably `package_show`, and sometimes high-volume calls to `package_search` can return **HTTP 403 Forbidden** error responses due to access controls or rate limiting.
 
@@ -36,7 +36,7 @@ $env:DATAGOV_API_KEY="YOUR_API_KEY"
 
 ### 3) Change the base-urls in the scripts
 
-To use the authenticated gateway, the CKAN API paths are the same, but the host for the base-urls needs to be modified in the scripts:
+In many cases, the scripts in this repository accept an api-key and will automatically switch between baseurls. In some cases, however, you will need to manually edit the scripts. In general, to use the authenticated gateway, the CKAN API paths are the same, but the host for the baseurls needs to be modified in the scripts:
 
 Replace:
 
