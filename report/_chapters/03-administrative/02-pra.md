@@ -10,7 +10,7 @@ As a result, the NIH does not need to seek OMB clearance for qualifying research
 
 The exemption does not eliminate other safeguards. NIH research remains subject to Institutional Review Board oversight, human subjects protections under the Common Rule, privacy protections, and other statutory constraints. But the PRA’s centralized, government-wide coordination function—particularly OMB’s role in reviewing redundancy and standards compliance—does not apply to exempt collections.
 
-# Conclusion
+## Conclusion
 
 In short, the NIH exemption in the 21st Century Cures Act was intended to accelerate biomedical research by reducing administrative friction. The tradeoff is a narrower layer of cross-agency oversight into whether qualifying research data collections are harmonized with federal data standards or unnecessarily duplicative. The exemption, despite the benefits it provides to accelerate biomedical research, poses an administrative risk to federal data integrity by removing a mechanism for federal-wide standards conformity and public input in to survey collections. 
 
