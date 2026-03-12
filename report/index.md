@@ -8,7 +8,7 @@ search_exclude: true
 ---
 
 # {{ page.title }}
-**Subtitle (optional)**
+**Evaluating Disruptions to Open Government Data, 2025-2026**
 
 **Author:** Christopher Steven Marcum, Ph.D.  
 **Organization:** CSM Advising LLC 
@@ -17,6 +17,4 @@ search_exclude: true
 
 ---
 
-This site contains a multi-page report with sidebar navigation, inline citations, and an integrated glossary.
-
-[Start reading →]({{ site.baseurl }}/chapters/01-introduction/)
+[Start reading →]({{ site.baseurl }}/chapters/introduction/)
