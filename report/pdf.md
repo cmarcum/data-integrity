@@ -11,7 +11,8 @@ search_exclude: true
 <!-- ===================================================== -->
 <div class="pdf-cover">
   <div class="pdf-cover__content" >
-    {% if site.description %}<p class="pdf-subtitle">{{ site.description }}</p>{% endif %}
+	{% if site.description %}<p class="pdf-subtitle">{{ site.description }}</p>{% endif %}
+	{% if site.subtitle %}<p class="pdf-subtitle">{{ site.subtitle }}</p>{% endif %}
     <div class="pdf-cover__rule"></div>
     {% if site.author %}<p class="pdf-author">{{ site.author }}</p>{% endif %}
     <p class="pdf-date">{{ site.time | date: "%B %Y" }}</p>

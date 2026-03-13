@@ -5,16 +5,18 @@ author: "Christopher Steven Marcum"
 permalink: /
 nav_exclude: true
 search_exclude: true
+title_color: "#ffffff"
 ---
 
-# {{ page.title }}
+# <span style="color: {{ page.title_color | default: '#333' }};"> {{ page.title }}
 **Evaluating Disruptions to Open Government Data, 2025-2026**
 
 **Author:** Christopher Steven Marcum, Ph.D.  
-**Organization:** CSM Advising LLC 
 **Date:** {{ "now" | date: "%B %d, %Y" }}  
-**Version:** 0.1
+**Version:** 0.5
 
 ---
 
 [Start reading →]({{ site.baseurl }}/chapters/introduction/)
+<br>
+[Copyright and Acknowledgments →]({{ site.baseurl }}/copyright/)
