@@ -18,6 +18,8 @@ library(dplyr)
 library(scales)
 library(patchwork)
 library(readr)
+library(tidyr)
+library(lubridate)
 
 df <- read_csv("../data/opm-workforce.csv", show_col_types = FALSE)
 df <- df %>%
@@ -92,3 +94,12 @@ barplot(table(prad$AdminYear),las=2,col=c("#3498db",rep("#e74c3c",4),rep("#2ecc7
         main="\n Number of Discontinued Information Collections \n by 'Administration' Year of Request to OIRA \n 1/21/2016-1/15/2026",ylim=c(0,800),xlab="Administration Year",ylab="Frequency")
 legend("topright",legend=c("Obama","Trump","Biden"),fill=c("#3498db","#e74c3c","#2ecc71"),bty="n")
 dev.off()
+
+#Line plot that reproduces (approximately) the Data.gov figure
+
+dcc <- read.csv("../data/datagov_collection_count-01262026.csv")
+dcc$Date <- as.Date(my(dcc$Date))
+dcc$FedMagOfChange <- as.numeric(as.character(dcc$FedMagOfChange))
+plot(dcc$Date, dcc$FedMagOfChange, type = "b", col = "#3498db", pch = 19,las=1, lwd = 2, main = "Month-to-Month Change in the Number of Federal Data Assets Indexed in Data.gov \n (2023 - 2026) 
+", xlab = "", ylab = "")
+abline(y=c(3000,-3000))
