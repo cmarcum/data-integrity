@@ -58,14 +58,15 @@ The following table provides a summary of the status of these major tools as of 
 
 | Data Tool | Original Agency | Current Functional Status | URL |
 | :--- | :--- | :--- | :--- |
-| AtlasPlus | CDC | Active; restored per court order | available at: https://gis.cdc.gov/grasp/nchhstpatlas/main.html |
-| CEJST / EJScreen | White House / CEQ / EPA | Eliminated; available via non-gov mirrors | mirror at: https://pedp-ejscreen.azurewebsites.net/ |
-| DHS STATCompiler | USAID | Eliminated; available via non-gov mirrors | mirror at: https://www.statcompiler.com |
-| NCA Hub | USGCRP | Active; modified per executive directive | partial mirror at: https://nca-atlas-nationalclimate.hub.arcgis.com/ |
-| Open HIFLD | DHS | Eliminated; no functional replacement | data archived at: https://www.datalumos.org/datalumos/search/studies?q=hifld%20open |
-| sdg.data.gov | OMB | Eliminated; no functional replacement | data archived at: https://github.com/GSA/sdg-data-usa/tree/develop/data |
-| SVI Interactive Map | OMB | Active; restored per court order | available at: https://www.atsdr.cdc.gov/place-health/php/svi/svi-interactive-map.html |
-| World Factbook | CIA | Eliminated; no functional replacement | various restoration efforts at: https://worldfactbook.us |
+| AtlasPlus | CDC | Active; restored per court order | available at: [https://gis.cdc.gov/grasp/nchhstpatlas/main.html](https://gis.cdc.gov/grasp/nchhstpatlas/main.html) |
+| CEJST / EJScreen | White House / CEQ / EPA | Eliminated; available via non-gov mirrors | mirror at: [https://pedp-ejscreen.azurewebsites.net/](https://pedp-ejscreen.azurewebsites.net/) |
+| DHS STATCompiler | USAID | Eliminated; available via non-gov mirrors | mirror at: [https://www.statcompiler.com](https://www.statcompiler.com) |
+| Climate Risk Viewer| USDA | Active; restored per court order |available at: [https://storymaps.arcgis.com/collections/87744e6b06c74e82916b9b11da218d28](https://storymaps.arcgis.com/collections/87744e6b06c74e82916b9b11da218d28) |
+| NCA Hub | USGCRP | Active; modified per executive directive | partial mirror at: [https://nca-atlas-nationalclimate.hub.arcgis.com/](https://nca-atlas-nationalclimate.hub.arcgis.com/) |
+| Open HIFLD | DHS | Eliminated; no functional replacement | data archived at: [https://www.datalumos.org/datalumos/search/studies?q=hifld%20open](https://www.datalumos.org/datalumos/search/studies?q=hifld%20open) |
+| sdg.data.gov | OMB | Eliminated; no functional replacement | data archived at: [https://github.com/GSA/sdg-data-usa/tree/develop/data](https://github.com/GSA/sdg-data-usa/tree/develop/data) |
+| SVI Interactive Map | CDC | Active; restored per court order | available at: [https://www.atsdr.cdc.gov/place-health/php/svi/svi-interactive-map.html](https://www.atsdr.cdc.gov/place-health/php/svi/svi-interactive-map.html) |
+| World Factbook | CIA | Eliminated; no functional replacement | various restoration efforts listed at: [https://worldfactbook.us](https://worldfactbook.us) |
 | :--- | :--- | :--- | :--- |
 
 ## Conclusion
