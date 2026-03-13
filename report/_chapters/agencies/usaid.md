@@ -1,6 +1,6 @@
 ---
 title: United States Agency for International Development
-parent: Agency Profiles
+parent: Agency Case Studies
 nav_order: 30
 ---
 

@@ -3,7 +3,6 @@ title: Data Tools
 nav_order: 40
 ---
 
-
 Datasets are the foundational collections of information that contain raw observations or measurements in structured or unstructured formats. These resources usually exist as static files in formats such as XLS, shapefiles, CSV, or JSON and require external software or specific technical skills to be useful. Raw data often remain difficult to use for individuals who do not possess specialized training in data science or statistics. For example, a federal agency might maintain a dataset containing millions of individual records of disease reports that serves as the base evidence for long-term research.
 
 Data tools, on the other hand, provide accessible platforms for users to interact with and understand those underlying datasets. Data tools help translate complex data into formats that are more readily accessible to a wider audience. Examples of data tools include dashboards and mapping portals that provide a way to search or visualize information without the need for manual coding. Their value to the public is significant because they provide a way for general data users, including small business owners, students, and local officials to access federal evidence without needing to perform their own technical analysis. This accessibility empowers the public to make informed decisions and supports transparency in government operations.
@@ -54,6 +53,7 @@ Ironically, one international data tool that was at significant risk but was not
 Most recently, The Central Intelligence Agency officially sunset the interactive version of the World Factbook on February 6, 2026. For decades, this tool was the global standard for comprehensive, country-level profiles, providing searchable data on everything from population health to geopolitical conflicts to telecommunications infrastructure. The takedown of the World Factbook was sudden and absolute {% cite marcum2026wfb %} - all traffic to the original website domain is currently forwarded to [an anonymous blog post](https://www.cia.gov/stories/story/spotlighting-the-world-factbook-as-we-bid-a-fond-farewell/) and all official backups were removed from the website. The removal of the interactive portal initiated community-led restoration projects. These non-governmental initiatives, listed on [worldfactbook.us](https://worldfactbook.us), collectively aim to preserve the static content, the searchable functionality, and historical continuity of the World Factbook. To date, there has not been a full restoration of the World Factbook similar to the restored functionality of some of the other data tools described in this chapter. 
 
 ## Data Tool Status Summary Table
+
 The following table provides a summary of the status of these major tools as of February 2026. This is not a comprehensive list of all data tools removed, but rather focuses on major resources discussed in the news media as high-value. A more comprehensive, albeit mixed, list is available on [Wikipedia](https://en.wikipedia.org/wiki/2025_United_States_government_online_resource_removals).
 
 | Data Tool | Original Agency | Current Functional Status | URL |
@@ -66,6 +66,7 @@ The following table provides a summary of the status of these major tools as of 
 | sdg.data.gov | OMB | Eliminated; no functional replacement | data archived at: https://github.com/GSA/sdg-data-usa/tree/develop/data |
 | SVI Interactive Map | OMB | Active; restored per court order | available at: https://www.atsdr.cdc.gov/place-health/php/svi/svi-interactive-map.html |
 | World Factbook | CIA | Eliminated; no functional replacement | various restoration efforts at: https://worldfactbook.us |
+| :--- | :--- | :--- | :--- |
 
 ## Conclusion
 

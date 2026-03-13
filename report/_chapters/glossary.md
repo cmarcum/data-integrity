@@ -17,8 +17,7 @@ nav_order: 1000
 
 <div class="container" id="top">
   <header>
-    <h1>{{ page.title }}</h1>
-    {{ "A selected list of terms and definitions used in this project. When feasible, term definitions were drawn from U.S. federal government sources as federal definitions can sometimes deviate from concensus-based definitions in standard sources. Additional general resources for terms related to this project include the [Open Data Handbook Glossary](https://opendatahandbook.org/glossary/en/) and the [Turing Way Glossary](https://book.the-turing-way.org/afterword/glossary/)." | markdownify }}
+    {{ "The glossary provides select list of terms and definitions used in this project. When feasible, term definitions were drawn from U.S. Federal Government sources as federal definitions can sometimes deviate from concensus-based definitions in standard sources. Additional general resources for terms related to this project include the [Open Data Handbook Glossary](https://opendatahandbook.org/glossary/en/) and the [Turing Way Glossary](https://book.the-turing-way.org/afterword/glossary/). The code for this glossary was adapted from [jekyll-glossary](https://github.com/cmarcum/jekyll-glossary) by the author." | markdownify }}
   </header>
 
   <nav class="alpha-nav">
