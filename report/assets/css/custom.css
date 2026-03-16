@@ -5,24 +5,6 @@
    - Sidebar takes a fixed/clamped width; main fills the rest
    ========================================================= */
 
-/* Disclaimer formatting */
-.report-disclaimer {
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(128, 128, 128, 0.3);
-  font-size: 0.85rem;
-  line-height: 1.4;
-  color: #6b7280; /* Muted gray text */
-  text-align: left;
-}
-
-@media print {
-  .report-disclaimer {
-    color: #444 !important; /* Slightly darker for printer contrast */
-    page-break-inside: avoid; /* Prevents the disclaimer from being orphaned on a new page */
-  }
-}
-
 /* ---- Core layout variables ---- */
 :root{
   /* Sidebar width (adjust if desired) */
@@ -45,11 +27,11 @@
   margin: 1.5rem auto;
 }
 
-/* ---- Headings / minor typography tweaks (keep yours) ---- */
+/* ---- Headings / minor typography tweaks ---- */
 .main-content h1:first-of-type { margin-top: 0.5rem; }
 .main-content h3 { margin-top: 1.25rem; }
 
-/* Optional: bibliography styling (keep yours) */
+/* Optional: bibliography styling */
 .csl-entry { margin-bottom: 0.75rem; }
 .csl-left-margin { font-weight: 600; margin-right: 0.5rem; }
 
@@ -191,83 +173,6 @@ body.cover-page .main-content-wrap {
 .pdf-subtitle { margin-top: 1rem; font-size: 2.5rem; }
 .pdf-author, .pdf-date { margin-top: 0.75rem; opacity: 0.95; font-size: 1.5rem; }
 
-/* Print rules *//* Print rules */
-/* Print rules */
-@media print {
-  /* A4 with 0.75in margins on all pages EXCEPT the first (cover) page */
-  @page {
-    size: A4;
-    margin: 0.75in;
-  }
-  @page :first {
-    margin: 0;
-  }
-
-  /* Hide site chrome */
-  .side-bar, .site-header, .nav-list, .site-footer, .breadcrumb-nav, .aux-nav { display: none !important; }
-
-  /* Let @page margins control layout; remove any wrapper padding/centering */
-  html, body {
-    margin: 0 !important;
-    padding: 0 !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-
-  .pdf-page .pdf-main,
-  .pdf-page .pdf-main-content {
-    margin: 0 !important;
-    padding: 0 !important;
-    max-width: none !important;
-    width: auto !important;
-  }
-
-  /* Ensure the cover truly occupies the first printed page */
-  .pdf-cover {
-    width: 210mm !important;
-    height: 297mm !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    max-width: none !important;
-    box-sizing: border-box;
-    overflow: hidden;
-    background: url("../images/cover.png") center / cover no-repeat !important;
-  }
-
-  /* Make cover text visible even if background graphics are disabled */
-  .pdf-cover__content {
-    color: #111 !important;
-    background: rgba(255,255,255,0.78) !important;
-    border-radius: 12px;
-    padding: 18mm 16mm !important;
-  }
-  .pdf-cover__rule { background: rgba(0,0,0,0.25) !important; }
-
-  /* Force page breaks where the template inserts them */
-  .page-break {
-    display: block;
-    break-after: page;
-    page-break-after: always;
-  }
-
-  /* Keep TOC together */
-  .pdf-toc-page {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-
-  .figcaption,
-  p.figcaption {
-    color: #111 !important;
-    margin-top: -0.5rem;
-    margin-bottom: 0.9rem;
-    font-size: 10.5pt;
-  }
-
-  /* Remove extra top margin on page-start headings */
-  .pdf-main-content h1 { margin-top: 0; }
-}
-
 /* When sidebar is hidden, reclaim full width */
 .side-bar.hidden + .main,
 .side-bar.hidden + .main-content-wrap{
@@ -309,8 +214,7 @@ body.cover-page .main-content-wrap {
 }
 
 /* =========================================================
-   Glossary-only styles (keep scoped; unchanged except
-   reducing outer margin/padding a touch to match “dense” layout)
+   Glossary-only styles 
    ========================================================= */
 
 .glossary-wrap {
@@ -464,15 +368,12 @@ body.cover-page .main-content-wrap {
 
 /* Glossary: offset anchor jumps so the term appears a few lines lower */
 @media screen {
-  /* Tune this: larger = more “space above” the targeted term */
   :root { --glossary-anchor-offset: 5rem; }
 
-  /* Term slugs (dt ids) */
   .glossary-wrap dt:target {
     scroll-margin-top: var(--glossary-anchor-offset);
   }
 
-  /* A/B/C section links from the alpha nav */
   .glossary-wrap .glossary-section:target {
     scroll-margin-top: var(--glossary-anchor-offset);
   }
@@ -483,9 +384,6 @@ body.cover-page .main-content-wrap {
 
 /* =========================================================
    Figure captions (screen + print)
-   Usage (recommended):
-     ![Alt text](/path/to/img.png){: .img-center }
-     Figure 1. Caption text.{: .figcaption }
    ========================================================= */
 .figcaption,
 p.figcaption {
@@ -503,4 +401,17 @@ p.figcaption {
 .chapter-title {
   margin-top: 0.5rem;
   margin-bottom: 1.25rem;
+}
+
+/* =========================================================
+   Disclaimer formatting
+   ========================================================= */
+.report-disclaimer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(128, 128, 128, 0.3);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #6b7280; 
+  text-align: left;
 }
