@@ -20,13 +20,25 @@
     print-color-adjust: exact !important;
   }
 
-  /* 3. Hide ALL Just the Docs Theme UI */
-  .side-bar, .site-header, .site-footer, .breadcrumb-nav, .aux-nav, .site-nav {
+  /* 3. Hide ALL Theme UI, including the top search bar */
+  .side-bar, .site-header, .main-header, .site-footer, .breadcrumb-nav, .aux-nav, .site-nav, .skip-to-main {
     display: none !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Kill any invisible phantom paragraphs Jekyll generated from empty markdown lines */
+  p:empty {
+    display: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   /* 4. Completely flatten the layout wrappers */
-  html, body, .main, .main-content, .main-content-wrap, #main-content, .page-content {
+  /* Added .pdf-page, .pdf-main, and .pdf-main-content to wipe out the 2rem padding */
+  html, body, .main, .main-content, .main-content-wrap, #main-content, .page-content,
+  .pdf-page, .pdf-main, .pdf-main-content {
     position: static !important;
     float: none !important;
     width: 100% !important;
@@ -48,7 +60,7 @@
     width: 210mm !important;
     height: 296mm !important;
     
-    /* Pull up by 1px to override any phantom Markdown/Browser gaps */
+    /* Pull up by 1px to override any phantom Browser gaps */
     margin: 0 !important;
     margin-top: -1px !important; 
     padding: 0 !important;
