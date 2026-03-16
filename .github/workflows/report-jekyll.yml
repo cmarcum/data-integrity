@@ -35,6 +35,28 @@ jobs:
         run: |
           bundle exec jekyll build --destination _site
 
+      - name: Generate PDF with Headless Chrome
+        working-directory: report
+        run: |
+          ln -s _site data-integrity
+          
+          python3 -m http.server 8080 &
+          SERVER_PID=$!
+          
+          sleep 3
+          
+          google-chrome-stable \
+            --headless \
+            --disable-gpu \
+            --no-sandbox \
+            --no-margins \
+            --no-pdf-header-footer \
+            --print-to-pdf=_site/Federal-Data-Integrity-Report.pdf \
+            http://localhost:8080/data-integrity/pdf/
+            
+          kill $SERVER_PID
+          rm data-integrity
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
