@@ -40,48 +40,38 @@ jobs:
         run: |
           pip install beautifulsoup4
           python3 -c '
-          import os
           from bs4 import BeautifulSoup
-
           with open("_site/pdf/index.html", "r") as f:
               soup = BeautifulSoup(f, "html.parser")
-
           for a in soup.find_all("a", href=True):
               href = a["href"]
-              # Skip internal anchor links, external links, and local assets
-              if href.startswith("#") or href.startswith("http") or "assets/" in href:
+              # Leave internal PDF anchors completely alone
+              if href.startswith("#") or "assets/" in href:
                   continue
-              
               # Rewrite relative routing to absolute live domain
               if href.startswith("/"):
                   a["href"] = "https://www.chrismarcum.com" + href
-              else:
+              elif not href.startswith("http"):
                   a["href"] = "https://www.chrismarcum.com/data-integrity/" + href
-
           with open("_site/pdf/index.html", "w") as f:
               f.write(str(soup))
           '
 
-      - name: Generate PDF with Headless Chrome
+      - name: Generate PDF with WeasyPrint
         working-directory: report
         run: |
-          ln -s _site data-integrity
+          sudo apt-get update
+          sudo apt-get install -y libpango-1.0-0 libpangoft2-1.0-0
+          pip install weasyprint
           
+          ln -s _site data-integrity
           python3 -m http.server 8080 &
           SERVER_PID=$!
-          
           sleep 3
           
-          google-chrome-stable \
-            --headless=new \
-            --disable-gpu \
-            --no-sandbox \
-            --no-margins \
-            --no-pdf-header-footer \
-            --export-tagged-pdf \
-            --print-to-pdf=_site/Federal-Data-Integrity-Report.pdf \
-            http://localhost:8080/data-integrity/pdf/
-            
+          # Render the PDF using a dedicated document engine
+          weasyprint http://localhost:8080/data-integrity/pdf/ _site/Federal-Data-Integrity-Report.pdf
+          
           kill $SERVER_PID
           rm data-integrity
 
@@ -96,26 +86,22 @@ jobs:
           import io
           from pypdf import PdfReader, PdfWriter
           from reportlab.pdfgen import canvas
-          from reportlab.lib.pagesizes import letter
+          from reportlab.lib.pagesizes import A4
 
           reader = PdfReader("_site/Federal-Data-Integrity-Report.pdf")
           writer = PdfWriter()
 
-          # Letter width in points (8.5 * 72 = 612)
-          page_width = 612.0
+          # A4 width in points
+          page_width = 595.27
 
           for i in range(len(reader.pages)):
               page = reader.pages[i]
               
-              # Start stamping on the 5th physical page (index 4)
               if i >= 4:
                   packet = io.BytesIO()
-                  can = canvas.Canvas(packet, pagesize=letter)
+                  can = canvas.Canvas(packet, pagesize=A4)
                   can.setFont("Helvetica", 10)
-                  
                   page_num = str(i - 3)
-                  
-                  # Draw string centered, 45 points from the bottom
                   can.drawCentredString(page_width / 2.0, 45, page_num)
                   can.save()
                   packet.seek(0)
