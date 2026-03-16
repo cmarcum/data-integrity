@@ -35,20 +35,37 @@ jobs:
         run: |
           bundle exec jekyll build --destination _site
 
+      - name: Prepare PDF Links
+        working-directory: report
+        run: |
+          pip install beautifulsoup4
+          python3 -c '
+          import os
+          from bs4 import BeautifulSoup
+
+          with open("_site/pdf/index.html", "r") as f:
+              soup = BeautifulSoup(f, "html.parser")
+
+          for a in soup.find_all("a", href=True):
+              href = a["href"]
+              # Skip internal anchor links, external links, and local assets
+              if href.startswith("#") or href.startswith("http") or "assets/" in href:
+                  continue
+              
+              # Rewrite relative routing to absolute live domain
+              if href.startswith("/"):
+                  a["href"] = "https://www.chrismarcum.com" + href
+              else:
+                  a["href"] = "https://www.chrismarcum.com/data-integrity/" + href
+
+          with open("_site/pdf/index.html", "w") as f:
+              f.write(str(soup))
+          '
+
       - name: Generate PDF with Headless Chrome
         working-directory: report
         run: |
           ln -s _site data-integrity
-          
-          # Rewrite cross-chapter links to point to the live website instead of localhost
-          python3 -c '
-          import re
-          with open("_site/pdf/index.html", "r") as f:
-              html = f.read()
-          html = re.sub(r"href=[\"'"'"']/data-integrity/(?!assets/)([^\"'"'"']*)[\"'"'"']", r"href=\"https://www.chrismarcum.com/data-integrity/\1\"", html)
-          with open("_site/pdf/index.html", "w") as f:
-              f.write(html)
-          '
           
           python3 -m http.server 8080 &
           SERVER_PID=$!
@@ -56,10 +73,9 @@ jobs:
           sleep 3
           
           google-chrome-stable \
-            --headless \
+            --headless=new \
             --disable-gpu \
             --no-sandbox \
-            --window-size=1920,1080 \
             --no-margins \
             --no-pdf-header-footer \
             --export-tagged-pdf \
@@ -76,17 +92,17 @@ jobs:
           source venv/bin/activate
           pip install pypdf reportlab
           
-          cat << 'EOF' > stamp_pages.py
+          cat << "EOF" > stamp_pages.py
           import io
           from pypdf import PdfReader, PdfWriter
           from reportlab.pdfgen import canvas
-          from reportlab.lib.pagesizes import A4
+          from reportlab.lib.pagesizes import letter
 
           reader = PdfReader("_site/Federal-Data-Integrity-Report.pdf")
           writer = PdfWriter()
 
-          # A4 width in points
-          page_width = 595.27
+          # Letter width in points (8.5 * 72 = 612)
+          page_width = 612.0
 
           for i in range(len(reader.pages)):
               page = reader.pages[i]
@@ -94,13 +110,12 @@ jobs:
               # Start stamping on the 5th physical page (index 4)
               if i >= 4:
                   packet = io.BytesIO()
-                  can = canvas.Canvas(packet, pagesize=A4)
+                  can = canvas.Canvas(packet, pagesize=letter)
                   can.setFont("Helvetica", 10)
                   
-                  # Set page number to 1 for the 5th physical page
                   page_num = str(i - 3)
                   
-                  # Draw string centered, 45 points from the bottom (safely inside the 1in CSS margin)
+                  # Draw string centered, 45 points from the bottom
                   can.drawCentredString(page_width / 2.0, 45, page_num)
                   can.save()
                   packet.seek(0)

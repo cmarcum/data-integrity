@@ -1,37 +1,44 @@
 @media print {
-  /* Default page margins */
-  @page { margin: 1in; }
+  /* Enforce standard US Letter paper and physical margins */
+  @page {
+    size: letter;
+    margin: 1in;
+  }
   
-  /* Remove margins ONLY for the very first page */
-  @page:first { margin: 0 !important; }
-
   /* Hide site chrome */
   .side-bar, .site-header, .nav-list, .site-footer, .breadcrumb-nav, .aux-nav { 
     display: none !important; 
   }
 
-  /* NUKE ALL theme wrappers that enforce padding and squeeze the cover */
+  /* Clean out padding/margins on wrappers that squeeze content */
   html, body, .main, .main-content, .main-content-wrap, #main-content, #main-content-wrap, .page-content {
     padding: 0 !important;
     margin: 0 !important;
     max-width: none !important;
-    width: auto !important;
+    width: 100% !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 
-  /* Force the cover to consume exactly 100% of the 0-margin first page */
+  /* * Absolute Full-Bleed Cover Hack
+   * By making it exactly 8.5x11 inches and pulling it -1in left and up,
+   * it flawlessly covers the physical page regardless of the 1-inch @page margin!
+   */
   .pdf-cover {
-    width: 100vw !important;
-    height: 100vh !important;
-    margin: 0 !important;
+    width: 8.5in !important;
+    height: 11in !important;
+    margin-top: -1in !important;
+    margin-left: -1in !important;
     padding: 0 !important;
     box-sizing: border-box !important;
+    
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
+    
     background: url("../images/cover.png") center center / cover no-repeat !important;
+    
     page-break-after: always !important;
     break-after: page !important;
   }
