@@ -1,60 +1,53 @@
-/* =========================================================
-   Print and PDF Export Styles
-   ========================================================= */
-
 @media print {
-  /* A4 with 1in margins on all pages EXCEPT the first (cover) page */
-  @page {
-    size: A4;
-    margin: 1in;
-  }
+  /* Default page margins */
+  @page { margin: 1in; }
   
-  @page :first {
-    margin: 0;
-  }
+  /* Remove margins ONLY for the very first page */
+  @page:first { margin: 0 !important; }
 
   /* Hide site chrome */
   .side-bar, .site-header, .nav-list, .site-footer, .breadcrumb-nav, .aux-nav { 
     display: none !important; 
   }
 
-  /* Let @page margins control layout; remove any wrapper padding/centering */
-  html, body {
-    margin: 0 !important;
+  /* NUKE ALL theme wrappers that enforce padding and squeeze the cover */
+  html, body, .main, .main-content, .main-content-wrap, #main-content, #main-content-wrap, .page-content {
     padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+    width: auto !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 
-  .pdf-page .pdf-main,
-  .pdf-page .pdf-main-content {
-    margin: 0 !important;
-    padding: 0 !important;
-    max-width: none !important;
-    width: auto !important;
-  }
-
-  /* Ensure the cover truly occupies the first printed page */
+  /* Force the cover to consume exactly 100% of the 0-margin first page */
   .pdf-cover {
-    width: 210mm !important;
-    height: 297mm !important;
+    width: 100vw !important;
+    height: 100vh !important;
     margin: 0 !important;
     padding: 0 !important;
-    max-width: none !important;
-    box-sizing: border-box;
-    overflow: hidden;
-    background: url("../images/cover.png") center / cover no-repeat !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: url("../images/cover.png") center center / cover no-repeat !important;
+    page-break-after: always !important;
+    break-after: page !important;
   }
 
-  /* Make cover text visible even if background graphics are disabled */
   .pdf-cover__content {
     color: #111 !important;
     background: rgba(255,255,255,0.78) !important;
     border-radius: 12px;
     padding: 18mm 16mm !important;
+    text-align: center;
   }
   
   .pdf-cover__rule { 
+    height: 1px;
+    width: 80%;
+    margin: 16px auto;
     background: rgba(0,0,0,0.25) !important; 
   }
 
@@ -71,22 +64,26 @@
     page-break-inside: avoid;
   }
 
-  .figcaption,
-  p.figcaption {
+  .figcaption, p.figcaption {
     color: #111 !important;
     margin-top: -0.5rem;
     margin-bottom: 0.9rem;
     font-size: 10.5pt;
   }
 
-  /* Remove extra top margin on page-start headings */
-  .pdf-main-content h1 { 
-    margin-top: 0; 
-  }
+  .pdf-main-content h1 { margin-top: 0; }
 
-  /* Disclaimer print overrides */
   .report-disclaimer {
     color: #444 !important; 
     page-break-inside: avoid; 
+  }
+
+  /* Wrap long code blocks */
+  pre, code, pre code, .highlight, .highlight pre, .highlighter-rouge .highlight {
+    white-space: pre-wrap !important;       
+    word-break: break-word !important;      
+    overflow-wrap: break-word !important;   
+    overflow-x: hidden !important;          
+    box-sizing: border-box !important;      
   }
 }

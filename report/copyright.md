@@ -13,8 +13,9 @@ The Integrity of Federal Data © 2026 by Christopher Steven Marcum, Ph.D., is li
 ![Got Data? CC-BY 4.0 Christopher Steven Marcum 22 April 2017]({{ site.baseurl }}/assets/images/marcum-got-data.jpg "Got Data? CC-BY 4.0 Christopher Steven Marcum 22 April 2017"){:.img-small .img-center}
 
 {:.text-center}
-Funding support for this project was provided by [NewVentureFund](https://newventurefund.org/).
+Funding support for this project was provided by *Funders for the Future of Public Data (3FPD)*.
 
 {:.text-center}
-*Acknowledgments* : The author is grateful to the following people for their reviews: Andrew Gerard, Hyon Kim, Jacob Pasner, Meghan Stuessy, 
+<br><small>*Acknowledgments* : The author is grateful to the following people for their reviews: </small>
+<!--- Andrew Gerard, Hyon Kim, Jacob Pasner, Meghan Stuessy, --->
 ---
