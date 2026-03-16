@@ -20,9 +20,19 @@
     print-color-adjust: exact !important;
   }
 
-  /* 3. Hide ALL Just the Docs Theme UI */
-  .side-bar, .site-header, .site-footer, .breadcrumb-nav, .aux-nav, .site-nav {
+  /* 3. Hide ALL Just the Docs Theme UI, including the top search bar */
+  .side-bar, .site-header, .main-header, .site-footer, .breadcrumb-nav, .aux-nav, .site-nav, .skip-to-main {
     display: none !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Kill any invisible phantom paragraphs Jekyll generated from empty markdown lines */
+  p:empty {
+    display: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   /* 4. Completely flatten the layout wrappers */
