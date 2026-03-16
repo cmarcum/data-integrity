@@ -37,21 +37,28 @@
     overflow: visible !important;
   }
 
-  /* 5. The Cover Page - Viewport units fill the 0-margin A4 page */
+  /* 5. The Cover Page - EXACT A4 sizing to stop page bleed */
   .pdf-cover {
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
     
-    width: 100vw !important;
-    height: 100vh !important;
+    /* Lock strictly to A4 dimensions, shaved 1mm to prevent 2nd page spill */
+    width: 210mm !important;
+    height: 296mm !important;
+    
+    /* Pull up by 1px to override any phantom Markdown/Browser gaps */
+    margin: 0 !important;
+    margin-top: -1px !important; 
+    padding: 0 !important;
     box-sizing: border-box !important;
     
     background: url("../images/cover.png") center center / cover no-repeat !important;
     
     break-after: page !important;
     page-break-after: always !important;
+    page-break-inside: avoid !important;
   }
 
   .pdf-cover__content {
