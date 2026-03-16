@@ -5,6 +5,24 @@
    - Sidebar takes a fixed/clamped width; main fills the rest
    ========================================================= */
 
+/* Disclaimer formatting */
+.report-disclaimer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(128, 128, 128, 0.3);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #6b7280; /* Muted gray text */
+  text-align: left;
+}
+
+@media print {
+  .report-disclaimer {
+    color: #444 !important; /* Slightly darker for printer contrast */
+    page-break-inside: avoid; /* Prevents the disclaimer from being orphaned on a new page */
+  }
+}
+
 /* ---- Core layout variables ---- */
 :root{
   /* Sidebar width (adjust if desired) */

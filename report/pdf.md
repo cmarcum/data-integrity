@@ -93,19 +93,13 @@ search_exclude: true
 <!-- ===================================================== -->
 {% assign chapters_all = site.chapters | where_exp: "c", "c.nav_exclude != true" %}
 
-{%- comment -%}
-  1) Top-level = no parent/grand_parent
-  2) Render top-level in nav_order order
-  3) For each top-level, render its children (parent == top.title) in nav_order order
-  4) Optionally render grandchildren (parent == child.title) if you use that depth
-{%- endcomment -%}
-
 {% assign top_level = chapters_all | where_exp: "c", "c.parent == nil and c.grand_parent == nil" | sort: "nav_order" %}
 
 {% for top in top_level %}
 <section id="{{ top.slug | default: top.title | slugify }}" class="pdf-chapter">
   <h1>{{ top.title }}</h1>
   {{ top.content }}
+  <div class="report-disclaimer"><p><em>{{ site.disclaimer }}</em></p></div>
 </section>
 <div class="page-break"></div>
 
@@ -114,6 +108,7 @@ search_exclude: true
 <section id="{{ child.slug | default: child.title | slugify }}" class="pdf-chapter pdf-subchapter">
   <h1>{{ child.title }}</h1>
   {{ child.content }}
+  <div class="report-disclaimer"><p><em>{{ site.disclaimer }}</em></p></div>
 </section>
 <div class="page-break"></div>
 
@@ -122,6 +117,7 @@ search_exclude: true
 <section id="{{ g.slug | default: g.title | slugify }}" class="pdf-chapter pdf-subchapter">
   <h1>{{ g.title }}</h1>
   {{ g.content }}
+  <div class="report-disclaimer"><p><em>{{ site.disclaimer }}</em></p></div>
 </section>
 <div class="page-break"></div>
 {% endfor %}
