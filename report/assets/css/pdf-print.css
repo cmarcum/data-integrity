@@ -1,95 +1,99 @@
 /* =========================================================
-   Print and PDF Export Styles (WeasyPrint / A4)
+   Native Browser Print Stylesheet (Ctrl+P / Cmd+P)
    ========================================================= */
 
 @media print {
-  /* Enforce A4 paper and physical margins */
+  /* 1. Page Definition: Standardize to A4 with 1in margins */
   @page {
     size: A4;
     margin: 1in;
   }
   
-  /* WeasyPrint perfectly maps this ONLY to the cover */
+  /* Remove margins natively for the first page only */
   @page :first {
     margin: 0;
   }
 
-  /* Hide site chrome */
-  .side-bar, .site-header, .nav-list, .site-footer, .breadcrumb-nav, .aux-nav { 
-    display: none !important; 
+  /* 2. Force browsers to render the cover background image */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
-  /* Strip Jekyll wrappers of any padding */
-  html, body, .main, .main-content, .main-content-wrap, #main-content, #main-content-wrap, .page-content {
-    padding: 0 !important;
-    margin: 0 !important;
-    max-width: none !important;
+  /* 3. Hide ALL Just the Docs Theme UI */
+  .side-bar, .site-header, .site-footer, .breadcrumb-nav, .aux-nav, .site-nav {
+    display: none !important;
+  }
+
+  /* 4. Completely flatten the layout wrappers */
+  html, body, .main, .main-content, .main-content-wrap, #main-content, .page-content {
+    position: static !important;
+    float: none !important;
     width: 100% !important;
-  }
-
-  /* Set cover to exact A4 dimensions */
-  .pdf-cover {
-    width: 210mm !important;
-    height: 297mm !important;
+    max-width: none !important;
     margin: 0 !important;
     padding: 0 !important;
-    box-sizing: border-box !important;
-    
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+
+  /* 5. The Cover Page - Viewport units fill the 0-margin A4 page */
+  .pdf-cover {
     display: flex !important;
     flex-direction: column !important;
-    align-items: center !important;
     justify-content: center !important;
+    align-items: center !important;
+    
+    width: 100vw !important;
+    height: 100vh !important;
+    box-sizing: border-box !important;
     
     background: url("../images/cover.png") center center / cover no-repeat !important;
+    
+    break-after: page !important;
     page-break-after: always !important;
   }
 
   .pdf-cover__content {
     color: #111 !important;
-    background: rgba(255,255,255,0.78) !important;
+    background: rgba(255,255,255,0.85) !important;
     border-radius: 12px;
-    padding: 18mm 16mm !important;
+    padding: 2rem !important;
     text-align: center;
+    max-width: 80%;
   }
   
   .pdf-cover__rule { 
     height: 1px;
     width: 80%;
-    margin: 16px auto;
-    background: rgba(0,0,0,0.25) !important; 
+    margin: 1rem auto;
+    background: rgba(0,0,0,0.3) !important; 
   }
 
-  .page-break {
-    display: block;
-    page-break-after: always;
-  }
-
-  .pdf-toc-page {
-    page-break-inside: avoid;
-  }
-
-  .figcaption, p.figcaption {
-    color: #111 !important;
-    margin-top: -0.5rem;
-    margin-bottom: 0.9rem;
-    font-size: 10.5pt;
+  /* 6. Typography & Safe Fonts */
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
   }
 
   .pdf-main-content h1 { 
     margin-top: 0; 
   }
-  
-  .report-disclaimer { 
-    color: #444 !important; 
-    page-break-inside: avoid; 
+
+  /* 7. Force long code blocks to wrap */
+  pre, code, .highlight {
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
   }
 
-  /* Wrap long code blocks */
-  pre, code, pre code, .highlight, .highlight pre, .highlighter-rouge .highlight {
-    white-space: pre-wrap !important;       
-    word-break: break-word !important;      
-    overflow-wrap: break-word !important;   
-    overflow-x: hidden !important;          
-    box-sizing: border-box !important;      
+  /* 8. Smart Page Breaks */
+  .page-break { 
+    break-after: page; 
+    page-break-after: always; 
   }
+  
+  h1, h2, h3, h4 { break-after: avoid; page-break-after: avoid; }
+  img, table, figure { break-inside: avoid; page-break-inside: avoid; }
+  .pdf-toc-page { break-inside: avoid; page-break-inside: avoid; }
+  .report-disclaimer { break-inside: avoid; page-break-inside: avoid; }
 }
