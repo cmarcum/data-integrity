@@ -16,10 +16,10 @@
 }
 
 /* Standard image widths */
-.img-small  { max-width: 300px; }
-.img-medium { max-width: 600px; }
-.img-large  { max-width: 900px; }
-.img-full   { width: 100%; }
+.img-small  { max-width: min(100%, 300px); height: auto; }
+.img-medium { max-width: min(100%, 600px); height: auto; }
+.img-large  { max-width: min(100%, 900px); height: auto; }
+.img-full   { width: 100%; height: auto; }
 
 /* Center images cleanly */
 .img-center {
