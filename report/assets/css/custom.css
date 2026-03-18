@@ -381,6 +381,19 @@ body.cover-page .main-content-wrap {
 
 .glossary-wrap .btn-primary:hover { opacity: 0.9; }
 
+@media (max-width: 50rem) {
+  .glossary-wrap dl {
+    grid-template-columns: 1fr; /* Forces a single, full-width column */
+  }
+  
+  .glossary-wrap dt {
+    margin-bottom: 0.5rem; /* Separates the term slightly from its definition */
+  }
+
+  .glossary-wrap dd {
+    margin-bottom: 2.5rem; /* Adds breathing room between individual glossary entries */
+  }
+}
 
 /* =========================================================
    Figure captions (screen + print)
