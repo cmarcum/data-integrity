@@ -96,3 +96,16 @@ footer { text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1p
 
 .btn-primary:hover { opacity: 0.9; }
 
+@media (max-width: 50rem) {
+  .glossary-wrap dl {
+    grid-template-columns: 1fr; /* Forces a single, full-width column */
+  }
+  
+  .glossary-wrap dt {
+    margin-bottom: 0.5rem; /* Separates the term slightly from its definition */
+  }
+
+  .glossary-wrap dd {
+    margin-bottom: 2.5rem; /* Adds breathing room between individual glossary entries */
+  }
+}
