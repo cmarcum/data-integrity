@@ -10,7 +10,8 @@ This project is organized into several directories:
 * **`/report`**: Contains the full text of the report, built using Jekyll and the Just the Docs theme. It includes chapters on executive summaries, agency-specific audits (e.g., OMB, USAID, VA), administrative actions, data tools, and a glossary. The report is configured to be served as a static website or compiled directly into a full-bleed PDF (once finalized).
 * **`/code`**: Houses the analytical and data-gathering scripts. It includes Python scripts for interacting with CKAN APIs (Data.gov), auditing data catalogs, and parsing Wayback Machine archives, as well as R scripts for statistical analysis and visualization of the data.
 * **`/data`**: Stores the raw and processed datasets used in the report. This includes JSON data dictionary snapshots from various federal agencies, Data.gov inventory counts, reginfo.gov data pulls, and more.
-* **`/images`**: Contains the charts, graphs, and workflow diagrams generated from the data and featured in the report.
+* **`/images`**: A placeholder for the charts, screenshots, graphs, and workflow diagrams generated from the data that supplement information featured in the report.
+* * **`/workflows`**: Contains the source files for mermaid.js workflows developed for the data auditing routines used in the report.
 
 # Scripts for Data.gov
 
