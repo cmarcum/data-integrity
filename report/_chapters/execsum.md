@@ -3,7 +3,7 @@ title: Executive Summary
 nav_order: 1
 ---
 
-This report provides an analysis of the integrity of federal open government data assets during the disruputions to the federal data ecosystem during 2025 and early 2026. Here, data integrity is  The findings clarify the scale and mechanisms of data disruptions by establishing a transparent methodology for auditing the federal data ecosystem.
+This report provides an analysis of the integrity of federal open government data assets during the disruputions to the federal data ecosystem during 2025 and early 2026. Here, data integrity is [defined]({{ site.baseurl }}/glossary/#data-integrity) as the "maintenance of, and the assurance of, data accuracy and consistency over its entire life-cycle", of which public access to open government data assets is assumed to be essential for their integrity. The findings clarify the scale and mechanisms of data disruptions by establishing a transparent methodology for auditing the federal data ecosystem.
 
 ## Scale of Data Disruptions
 
