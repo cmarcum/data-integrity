@@ -8,7 +8,7 @@
 /* ---- Core layout variables ---- */
 :root{
   /* Sidebar width (adjust if desired) */
-  --nav-width: clamp(200px, 16vw, 280px);
+  --nav-width: clamp(260px, 18vw, 320px);
 
   /* Minimal padding around main text */
   --content-pad-x: 1.0rem;
