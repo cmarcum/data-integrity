@@ -17,5 +17,5 @@ Funding support for this project was provided by *Funders for the Future of Publ
 
 {:.text-center}
 <br><small>*Acknowledgments* : The author is grateful to the following people for their reviews: </small>
-<!--- Andrew Gerard, Hyon Kim, Jacob Pasner, Meghan Stuessy, --->
+<!--- Claire McKay Bowen, Andrew Gerard, Hyon Kim, Jacob Pasner, Meghan Stuessy, and two additional anonymous reviewers --->
 ---
