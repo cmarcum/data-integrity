@@ -16,8 +16,11 @@ title_color: "#ffffff"
 **Version:** 0.5
 
 ---
+
 [Start reading: Introduction]({{ site.baseurl }}/chapters/introduction/)
 <br>
 [Start reading: Executive Summary]({{ site.baseurl }}/chapters/execsum/)
+<br>
+
 ---
 [Copyright and Acknowledgments]({{ site.baseurl }}/copyright/)
