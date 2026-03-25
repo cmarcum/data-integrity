@@ -57,7 +57,7 @@ Like public access removal, discontinuations were widespread during 2025. An exa
 
 ## Structure of this report
 
-This report was created using a custom GitHub pages deployment based on [JustTheDocs](https://github.com/just-the-docs/just-the-docs) and [jekyll-scholar](https://github.com/inukshuk/jekyll-scholar). This allows for a more dynamic reading experience and facilitates collaborative updating in the future. A version of the entire report suitable for viewing and printing is [available here]({{ site.baseurl}}/pdf). 
+This report was created using a custom GitHub pages deployment based on [JustTheDocs](https://github.com/just-the-docs/just-the-docs) and [jekyll-scholar](https://github.com/inukshuk/jekyll-scholar). This allows for a more dynamic reading experience and facilitates collaborative updating in the future. A version of the entire report suitable for viewing and printing is [available here]({{ site.baseurl}}/pdf). Each chapter can be read separately - there are no linear dependencies between the chapters of this report. 
 
 ### Chapter Contents
 
@@ -67,7 +67,7 @@ This Introduction and the [Executive Summary]({{ site.baseurl }}/chapters/execsu
 * **Administrative Risks to Data**: This group of chapters examines several administrative risks to federal data and information collections.
     * **The Richardson Waiver Rescission**: This chapter provides a specific case study related to data integrity challenges that *could* result from the recent decision from the US Department of Health and Human Services to avoid the certain Administrative Procedures Act processes. [Read chapter.]({{ site.baseurl }}/chapters/richardson/)
     * **The Paperwork Reduction Act Exemptions**: This chapter explains the legal requirements for federal information collection and how certain exemptions to those requirements pose a significant risk to federal data oversight and integrity. [Read chapter.]({{ site.baseurl }}/chapters/pra/)
-    * **Information Collection Discontinuation**: This chapter analyzes the processes and impacts of ending specific data collections through the standard Paperwork Reduction Act and Administrative Procedures Act processes. [Read chapter.]({{ site.baseurl }}/chapters/discontinuation/)
+    * **Information Collection Discontinuation and Revision**: This chapter analyzes the processes and impacts of ending specific data collections through the standard Paperwork Reduction Act and Administrative Procedures Act processes. [Read chapter.]({{ site.baseurl }}/chapters/discontinuation/)
     * **Resourcing and Staffing**: This chapter focuses on the impacts of funding and staffing changes at federal agencies necessary to maintain data assets. [Read chapter.]({{ site.baseurl }}/chapters/deresourcing/)
 * **Data Tools**: This chapter reviews removal of the various tools and platforms used by agencies to disseminate data and information to the public. [Read chapter.]({{ site.baseurl }}/chapters/data-tools/)
 * **Agency Case Studies**: These chapters provide detailed examinations of cases of data integrity issues at three specific agencies:
@@ -79,6 +79,7 @@ This Introduction and the [Executive Summary]({{ site.baseurl }}/chapters/execsu
 * **Glossary**: The section provides a comprehensive glossary of terms either directly referenced within the report or otherwise relevant to federal data. [View glossary.]({{ site.baseurl }}/chapters/glossary/)
 
 ### Artificial Intelligence Use Disclosure
+
 No artificial intelligence system (AI) was used in the writing of the text included in this report. However, AI large-language models were used in several other ways that contributed to the quality of this report. These included:
 
 * Generating bibtex entry citations from URLs and uploaded documents using a custom-build agent with Google Lab's Gem/Opal [available here](https://gemini.google.com/gem-labs/1MUtJuZgxGWLM1fcmGxS5VUS9PS5AutKi).
