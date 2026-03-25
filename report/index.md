@@ -16,15 +16,8 @@ title_color: "#ffffff"
 **Version:** 0.5
 
 ---
-
-[Start reading: Introduction]({{ site.baseurl }}/chapters/introduction/)
-<br>
-[Start reading: Executive Summary]({{ site.baseurl }}/chapters/execsum/)
-<br>
-
----
 [Copyright and Acknowledgments]({{ site.baseurl }}/copyright/)
-
 ---
-<br><br>
+
+<br>
 Disclaimer: This report is currently in-progress and should not yet be cited. Submit public feedback through https://github.com/cmarcum/data-integrity/issues or private feedback to christopher.steven.marcum@gmail.com .
