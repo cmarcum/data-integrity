@@ -25,6 +25,10 @@ However, data restoration is very likely to involve an assessment of whether the
 
 Fortunately, much of the publicly accessible data held by USAID [was preserved](https://lil.law.harvard.edu/data-gov-archive/?resource=publishers/data.usaid.gov) by the Library Innovation Lab at Harvard Law School's efforts to archive all of the assets held by Data.gov between late 2024 and mid-2025 {% cite satter2025harvard %}. 
 
+## Conclusion
+
+The sudden dismantling of USAID in early 2025 precipitated a massive, albeit underreported, disruption to global development and public health data access. While swift interventions by civic society groups and at least one USAID contractor managed to rescue critical assets like the Demographic and Health Surveys and portions of the Development Data Library, the broader data infrastructure remains severely compromised. The ongoing uncertainty surrounding records preservation (including final disposition in the National Archives), compounded by the politicized purging of specific datasets to align with new administration priorities, highlights the profound vulnerability of federally funded research to abrupt administrative shifts, policy reprioritization, and ideological censorship.
+
 ## References
 
 {% bibliography --cited %}
