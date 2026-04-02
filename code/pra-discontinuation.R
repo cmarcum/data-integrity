@@ -12,13 +12,20 @@ prad<-prad[which(prad$Web_Request.Type=="Discontinue"),]
 #Barplot of discontinuations by year
 
 # Colors:
-# #e74c3c - reddish
-# #3498db - bluish
-# #2ecc71 - greenish
+# #CC79A7 - reddish
+# #56B4E9 - bluish
+# #009E73 - greenish
+
+# Colors from Okabe-Ito colorblind-friendly palette:
+okabe_ito <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#000000")
+
+# #CC79A7 - reddish
+# #56B4E9 - bluish
+# #009E73 - greenish
 
 png("../report/assets/images/icr-discontinuations.png",width = 2500, height=2500, res=300)
-barplot(table(prad$AdminYear),las=2,col=c("#3498db",rep("#e74c3c",4),rep("#2ecc71",4),"#e74c3c"),
+barplot(table(prad$AdminYear),las=2,col=c("#56B4E9",rep("#CC79A7",4),rep("#009E73",4),"#CC79A7"),
         main="\n Number of Discontinued Information Collections \n by 'Administration' Year of Request to OIRA \n 1/21/2016-1/15/2026",ylim=c(0,800),xlab="Administration Year",ylab="Frequency")
-legend("topright",legend=c("Obama","Trump","Biden"),fill=c("#3498db","#e74c3c","#2ecc71"),bty="n")
+legend("topright",legend=c("Obama","Trump","Biden"),fill=c("#56B4E9","#CC79A7","#009E73"),bty="n")
 dev.off()
 

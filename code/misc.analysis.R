@@ -3,10 +3,12 @@
 # Last Modified: 3.3.2026
 ####
 
-# Colors:
-# #e74c3c - reddish
-# #3498db - bluish
-# #2ecc71 - greenish
+# Colors from Okabe-Ito colorblind-friendly palette:
+okabe_ito <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#000000")
+
+# #CC79A7 - reddish
+# #56B4E9 - bluish
+# #009E73 - greenish
 
 # USAID proportion of public datasets
 usaid.datainventory.2025012029 <- read.csv("../data/usaid-datainventory-2025012029.csv")
@@ -32,7 +34,7 @@ df <- df %>%
 
 # Plot 1: Absolute Workforce Changes (Count)
 p1 <- ggplot(df, aes(x = `Workforce changes count`, y = `Federal Agency`)) +
-  geom_col(fill = "#e74c3c") +
+  geom_col(fill = "#CC79A7") +
   geom_text(aes(label = comma(`Workforce changes count`)), 
             hjust = 1.1, size = 4, color = "black") +
   labs(
@@ -50,7 +52,7 @@ p1 <- ggplot(df, aes(x = `Workforce changes count`, y = `Federal Agency`)) +
 
 # Plot 2: Percentage Cuts
 p2 <- ggplot(df, aes(x = `Percentage Cut (%)`, y = `Federal Agency`)) +
-  geom_col(fill = "#3498db") +
+  geom_col(fill = "#56B4E9") +
   geom_text(aes(label = sprintf("%.1f%%", `Percentage Cut (%)`)), 
             hjust = -0.1, size = 4, color = "black") +
   labs(
@@ -90,9 +92,9 @@ prad<-prad[which(prad$Web_Request.Type=="Discontinue"),]
 #Barplot of discontinuations by year
 
 png("../report/assets/images/icr-discontinuations.png",width = 2500, height=2500, res=300)
-barplot(table(prad$AdminYear),las=2,col=c("#3498db",rep("#e74c3c",4),rep("#2ecc71",4),"#e74c3c"),
+barplot(table(prad$AdminYear),las=2,col=c("#56B4E9",rep("#CC79A7",4),rep("#009E73",4),"#CC79A7"),
         main="\n Number of Discontinued Information Collections \n by 'Administration' Year of Request to OIRA \n 1/21/2016-1/15/2026",ylim=c(0,800),xlab="Administration Year",ylab="Frequency")
-legend("topright",legend=c("Obama","Trump","Biden"),fill=c("#3498db","#e74c3c","#2ecc71"),bty="n")
+legend("topright",legend=c("Obama","Trump","Biden"),fill=c("#56B4E9","#CC79A7","#009E73"),bty="n")
 dev.off()
 
 #Line plot that reproduces (approximately) the Data.gov figure
@@ -100,6 +102,6 @@ dev.off()
 dcc <- read.csv("../data/datagov_collection_count-01262026.csv")
 dcc$Date <- as.Date(my(dcc$Date))
 dcc$FedMagOfChange <- as.numeric(as.character(dcc$FedMagOfChange))
-plot(dcc$Date, dcc$FedMagOfChange, type = "b", col = "#3498db", pch = 19,las=1, lwd = 2, main = "Month-to-Month Change in the Number of Federal Data Assets Indexed in Data.gov \n (2023 - 2026) 
+plot(dcc$Date, dcc$FedMagOfChange, type = "b", col = "#56B4E9", pch = 19,las=1, lwd = 2, main = "Month-to-Month Change in the Number of Federal Data Assets Indexed in Data.gov \n (2023 - 2026) 
 ", xlab = "", ylab = "")
 abline(y=c(3000,-3000))

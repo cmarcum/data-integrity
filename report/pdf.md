@@ -6,87 +6,66 @@ nav_exclude: true
 search_exclude: true
 ---
 
-<!-- ===================================================== -->
-<!-- COVER PAGE -->
-<!-- ===================================================== -->
-<div class="pdf-cover">
-  <div class="pdf-cover__content" >
-	{% if site.description %}<p class="pdf-subtitle">{{ site.description }}</p>{% endif %}
-	{% if site.subtitle %}<p class="pdf-subtitle">{{ site.subtitle }}</p>{% endif %}
-    <div class="pdf-cover__rule"></div>
-    {% if site.author %}<p class="pdf-author">{{ site.author }}</p>{% endif %}
+<section class="pdf-cover">
+  <div class="pdf-cover__panel">
+    {% if site.description %}
+    <h1>{{ site.description }}</h1>
+    {% endif %}
+
+    {% if site.subtitle %}
+    <p class="pdf-subtitle">{{ site.subtitle }}</p>
+    {% endif %}
+
+    {% if site.author %}
+    <p class="pdf-author">{{ site.author }}</p>
+    {% endif %}
+
     <p class="pdf-date">{{ site.time | date: "%B %Y" }}</p>
   </div>
-</div>
-
-<div class="page-break"></div>
-
-<div class="pdf-body">
-
-<!-- ===================================================== -->
-<!-- COPYRIGHT PAGE (pulled from copyright.md) -->
-<!-- ===================================================== -->
-{% assign cp = site.pages | where: "name", "copyright.md" | first %}
-{% if cp %}
-<section class="pdf-frontmatter" id="copyright">
-  <h1>{{ cp.title | default: "" }}</h1>
-  {{ cp.content }}
 </section>
-<div class="page-break"></div>
-{% endif %}
 
-<!-- ===================================================== -->
-<!-- TABLE OF CONTENTS (nested using parent relationships) -->
-<!-- ===================================================== -->
-<section class="pdf-toc-page">
-<h1> Table of Contents</h1>
+<section class="pdf-frontmatter">
+  {% assign cp = site.pages | where: "name", "copyright.md" | first %}
+  {% if cp %}
+  <section class="pdf-copyright">
+  # {{ cp.title | default: "" }}
 
-{% assign chapters_sorted = site.chapters | where_exp: "c", "c.nav_exclude != true" %}
+  {{ cp.content }}
+  </section>
+  {% endif %}
 
-{% assign top_level_toc = chapters_sorted | where_exp: "c", "c.parent == nil and c.grand_parent == nil" | sort: "nav_order" %}
+  <section class="pdf-toc">
+  # Table of Contents
 
-<ul class="pdf-toc">
+  {% assign chapters_sorted = site.chapters | where_exp: "c", "c.nav_exclude != true" %}
+  {% assign top_level_toc = chapters_sorted | where_exp: "c", "c.parent == nil and c.grand_parent == nil" | sort: "nav_order" %}
   {% for top in top_level_toc %}
-    {% unless top.nav_exclude %}
-      {% if top.parent == nil and top.grand_parent == nil %}
-        <li>
-          <a href="#{{ top.slug | default: top.title | slugify }}">{{ top.title }}</a>
-
-          {% assign children = chapters_sorted | where: "parent", top.title | sort: "nav_order" %}
-          {% if children.size > 0 %}
-            <ul>
-              {% for child in children %}
-                {% unless child.nav_exclude %}
-                  <li>
-                    <a href="#{{ child.slug | default: child.title | slugify }}">{{ child.title }}</a>
-
-                    {% assign grands = chapters_sorted | where: "parent", child.title | sort: "nav_order" %}
-                    {% if grands.size > 0 %}
-                      <ul>
-                        {% for g in grands %}
-                          {% unless g.nav_exclude %}
-                            <li>
-                              <a href="#{{ g.slug | default: g.title | slugify }}">{{ g.title }}</a>
-                            </li>
-                          {% endunless %}
-                        {% endfor %}
-                      </ul>
-                    {% endif %}
-
-                  </li>
-                {% endunless %}
-              {% endfor %}
-            </ul>
-          {% endif %}
-
-        </li>
+  {% unless top.nav_exclude %}
+  {% if top.parent == nil and top.grand_parent == nil %}
+    * [{{ top.title }}](#{{ top.title | slugify }})
+    {% assign children = chapters_sorted | where: "parent", top.title | sort: "nav_order" %}
+    {% if children.size > 0 %}
+    {% for child in children %}
+    {% unless child.nav_exclude %}
+      * [{{ child.title }}](#{{ child.title | slugify }})
+      {% assign grands = chapters_sorted | where: "parent", child.title | sort: "nav_order" %}
+      {% if grands.size > 0 %}
+      {% for g in grands %}
+      {% unless g.nav_exclude %}
+        * [{{ g.title }}](#{{ g.title | slugify }})
+      {% endunless %}
+      {% endfor %}
       {% endif %}
     {% endunless %}
+    {% endfor %}
+    {% endif %}
+  {% endif %}
+  {% endunless %}
   {% endfor %}
-</ul>
+  </section>
 </section>
 
-<div class="page-break"></div>
+<section class="pdf-body">
 
 <!-- ===================================================== -->
 <!-- MAIN REPORT -->
@@ -125,3 +104,5 @@ search_exclude: true
 {% endfor %}
 
 </div>
+
+</section>

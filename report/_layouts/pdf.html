@@ -1,16 +1,12 @@
----
-layout: nil
----
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ site.lang | default: 'en-US' }}">
-  <head>
-    {% include head.html %}
-  </head>
-  <body class="pdf-page">
-    <main class="pdf-main">
-      <div class="pdf-main-content">
-        {{ content }}
-      </div>
-    </main>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>{{ page.title | default: site.title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/pdf-print.css' | relative_url }}">
+</head>
+<body class="pdf-root">
+  {{ content }}
+</body>
 </html>
