@@ -1,6 +1,6 @@
 ---
 layout: cover
-title: "The Integrity of Federal Data"
+title: "The Integrity of Public Access to Federal Data"
 author: "Christopher Steven Marcum"
 permalink: /
 nav_exclude: true
