@@ -62,7 +62,7 @@ The report findings highlight that while direct data loss was relatively rare, t
 ### **Recommendations for Other Stakeholders**
 
 * **Utilize Replicable Auditing**: Employ and fund independent, code-based auditing workflows. Support and leverage tools like the Internet Archive’s Wayback Machine to verify agency data holdings rather than relying on the unreliable contemporary topline dataset counts provided by Data.gov.
-* **Engage in "Market Test" Advocacy**: Continue using targeted litigation as a "market test" for data value; court rulings have proven to be the most effective mechanism for restoring high-value assets removed from public access.
+* **Engage in "Market Test" Advocacy**: Continue using targeted litigation as a "market test" for data value; court rulings have proven to be an effective mechanism for restoring high-value data assets removed from public access.
 * **Coordinate Data Rescue Efforts**: While redundancy and overlap is desirable, the ecosystem can suffer from competition and lack of coordination between data rescue and preservation efforts. Funders might consider conditioning projects on coordination and collaboration to ensure that redundant efforts work towards synergies and learn from one another.
 * **Formalize Public Comment**: Use monitoring platforms (like [dataindex.us](dataindex.us)) to keep track of changes to information collections that create federal data assets to organize and submit public comments during revision proposals. 
 
