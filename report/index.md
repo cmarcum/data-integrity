@@ -16,8 +16,5 @@ title_color: "#ffffff"
 **Version:** 0.5
 
 ---
-[Copyright and Acknowledgments]({{ site.baseurl }}/copyright/)
+<center>[Copyright and Acknowledgments]({{ site.baseurl }}/copyright/)</center>
 ---
-
-<br>
-Disclaimer: This report is currently in-progress and should not yet be cited. Submit public feedback through https://github.com/cmarcum/data-integrity/issues or private feedback to christopher.steven.marcum@gmail.com .
