@@ -1,4 +1,4 @@
-# The Integrity of Federal Data
+# The Integrity of Public Access to Federal Data
 **Evaluating Disruptions to Open Government Data, 2025-2026**
 
 This repository contains the source code, raw data, and the complete text for a report evaluating the state of open government data and the impacts of administrative disruptions between 2025 and 2026. The report is not yet finalized and is currently in-revision and under-review. 
