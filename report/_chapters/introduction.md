@@ -82,11 +82,11 @@ This Introduction and the [Executive Summary]({{ site.baseurl }}/chapters/execsu
 
 No artificial intelligence system (AI) was used in the writing of the text included in this report. However, AI large-language models were used in several other ways that contributed to the quality of this report. These included:
 
-* Generating bibtex entry citations from URLs and uploaded documents using a custom-build agent with Google Lab's Gem/Opal [available here](https://gemini.google.com/gem-labs/1MUtJuZgxGWLM1fcmGxS5VUS9PS5AutKi).
-* Monitoring RSS and news feeds for new developments in the press on data integrity issues relevant to this report using OpenAI's "Pulse" with the following prompt: "Search for newly published (January 2026 onward) news stories, blog posts, academic papers, and Federal Register notices related to federal data, including statistical data, scientific data, privacy, removal, deletion, or integrity concerns, and notify me with a concise summary."
-* Assisting with code generation, debugging coding errors, and designing API navigation routines using Google Gemini linked to the project's GitHub repository. All AI-generated code is disclosed in the comments of relevant scripts.
-* Creating figures from presentation slides using Google Slides's 'beautify this slide' functionality. All images created this way are disclosed in the captions. 
-
+* Google Gemini: Generating bibtex entry citations from URLs and uploaded documents using a custom-build agent with Google Lab's Gem/Opal [available here](https://gemini.google.com/gem-labs/1MUtJuZgxGWLM1fcmGxS5VUS9PS5AutKi).
+* ChatGPT: Monitoring RSS and news feeds for new developments in the press on data integrity issues relevant to this report using OpenAI's "Pulse" with the following prompt: "Search for newly published (January 2026 onward) news stories, blog posts, academic papers, and Federal Register notices related to federal data, including statistical data, scientific data, privacy, removal, deletion, or integrity concerns, and notify me with a concise summary."
+* Claude Code and Google Gemini Pro: Assisting with code generation, debugging coding errors, and designing API navigation routines linked to the project's GitHub repository. All AI-generated code is disclosed in the comments of relevant scripts.
+* Google Gemini Fast: Creating figures from presentation slides using Google Slides's 'beautify this slide' functionality. All images created this way are disclosed in the captions. 
+* Google Gemini Pro: Creating a graphical abstract of the whole project for the [Executive Summary]({{ site.baseurl }}/chapters/execsum/). This was done by granting Google Gemini Pro Model access to the repository and instructing with the prompt to: "carefully read the report and pay particular attention to the /report/_chapters/execsum.md. Create an infographic that could be used as a graphical abstract of the whole project to include in the executive summary."
 
 ## References
 
