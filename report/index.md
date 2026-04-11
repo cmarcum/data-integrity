@@ -16,9 +16,6 @@ title_color: "#ffffff"
 **Version:** 0.5
 
 ---
-<div style="text-align: center;">
-  
+{: .text-center}
 [Copyright and Acknowledgments]({{ site.baseurl }}/copyright/)
-
-</div>
 ---
