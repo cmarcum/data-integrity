@@ -103,10 +103,29 @@
     max-height: 3.5in;
     width: auto;
     max-width: 100%;
-    margin: 1.5rem auto;
-    display: block;
     page-break-inside: avoid;
     break-inside: avoid;
+  }
+
+  /* Prevent small icons from displaying as blocks */
+  .pdf-copyright img.img-center,
+  .pdf-copyright p > img:not([style*="max-width: 1em"]) {
+    display: block;
+    margin: 1.5rem auto;
+  }
+
+  /* Force CC icons to stay inline with text */
+  .pdf-copyright img[style*="max-width: 1em"] {
+    display: inline-block !important;
+    vertical-align: text-bottom;
+    margin: 0 0.15em !important;
+  }
+
+  /* Ensure blockquotes are left-justified within the centered container */
+  .pdf-copyright blockquote {
+    text-align: left;
+    margin: 1.5rem auto;
+    max-width: 90%;
   }
 
   /* Table of Contents Formatting */
@@ -136,15 +155,16 @@
     line-height: 1.4;
   }
 
+  /* Ensure PDF viewers recognize and style TOC links */
   .pdf-toc a {
     text-decoration: none;
-    color: #222;
+    color: #0052cc;
     font-weight: 600;
   }
 
   .pdf-toc ul ul a {
     font-weight: normal;
-    color: #444;
+    color: #333;
   }
 
   /* Chapter and Content Formatting */
@@ -153,7 +173,6 @@
     page-break-before: always;
   }
 
-  /* Nested chapters continue smoothly, but try to avoid stranding headers */
   .pdf-subchapter {
     break-before: auto;
     page-break-before: auto;

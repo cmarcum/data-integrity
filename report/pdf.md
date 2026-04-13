@@ -39,18 +39,18 @@ search_exclude: true
   <ul>
     {% for top in top_level_toc %}
     <li>
-      <a href="#{{ top.slug | default: top.title | slugify }}">{{ top.title }}</a>
+      <a href="#pdf-{{ top.slug | default: top.title | slugify }}">{{ top.title }}</a>
       {% assign children = chapters_sorted | where: "parent", top.title %}
       {% if children.size > 0 %}
       <ul>
         {% for child in children %}
         <li>
-          <a href="#{{ child.slug | default: child.title | slugify }}">{{ child.title }}</a>
+          <a href="#pdf-{{ child.slug | default: child.title | slugify }}">{{ child.title }}</a>
           {% assign grands = chapters_sorted | where: "parent", child.title %}
           {% if grands.size > 0 %}
           <ul>
             {% for g in grands %}
-            <li><a href="#{{ g.slug | default: g.title | slugify }}">{{ g.title }}</a></li>
+            <li><a href="#pdf-{{ g.slug | default: g.title | slugify }}">{{ g.title }}</a></li>
             {% endfor %}
           </ul>
           {% endif %}
@@ -65,7 +65,7 @@ search_exclude: true
 
 <section class="pdf-body">
   {% for top in top_level_toc %}
-  <article id="{{ top.slug | default: top.title | slugify }}" class="pdf-chapter">
+  <article id="pdf-{{ top.slug | default: top.title | slugify }}" class="pdf-chapter">
     <h1>{{ top.title }}</h1>
     {{ top.content }}
     <div class="report-disclaimer"><p><em>{{ site.disclaimer }}</em></p></div>
@@ -73,7 +73,7 @@ search_exclude: true
 
   {% assign children = chapters_sorted | where: "parent", top.title %}
   {% for child in children %}
-  <article id="{{ child.slug | default: child.title | slugify }}" class="pdf-chapter pdf-subchapter">
+  <article id="pdf-{{ child.slug | default: child.title | slugify }}" class="pdf-chapter pdf-subchapter">
     <h2>{{ child.title }}</h2>
     {{ child.content }}
     <div class="report-disclaimer"><p><em>{{ site.disclaimer }}</em></p></div>
@@ -81,7 +81,7 @@ search_exclude: true
 
   {% assign grands = chapters_sorted | where: "parent", child.title %}
   {% for g in grands %}
-  <article id="{{ g.slug | default: g.title | slugify }}" class="pdf-chapter pdf-subchapter">
+  <article id="pdf-{{ g.slug | default: g.title | slugify }}" class="pdf-chapter pdf-subchapter">
     <h3>{{ g.title }}</h3>
     {{ g.content }}
     <div class="report-disclaimer"><p><em>{{ site.disclaimer }}</em></p></div>
