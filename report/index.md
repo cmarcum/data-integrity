@@ -22,6 +22,6 @@ title_color: "#ffffff"
 [Copyright and Acknowledgments]({{ site.baseurl }}/copyright/)
 
 {: .text-center}
-[Print Version](https://www.doi.org/10.5281/zenodo.19556076)
+[Printable Version](https://www.doi.org/10.5281/zenodo.19556076)
 
 ---

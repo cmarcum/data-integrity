@@ -24,85 +24,72 @@ search_exclude: true
   </div>
 </section>
 
-<section class="pdf-frontmatter">
-  {% assign cp = site.pages | where: "name", "copyright.md" | first %}
-  {% if cp %}
-  <section class="pdf-copyright">
-  # {{ cp.title | default: "" }}
+{% assign cp = site.pages | where: "name", "copyright.md" | first %}
+{% if cp %}
+<section class="pdf-copyright">
+  <h1>{{ cp.title | default: "Copyright Information" }}</h1>
+  {{ cp.content | markdownify }}
+</section>
+{% endif %}
 
-  {{ cp.content }}
-  </section>
-  {% endif %}
-
-  <section class="pdf-toc">
-  # Table of Contents
-
-  {% assign chapters_sorted = site.chapters | where_exp: "c", "c.nav_exclude != true" %}
-  {% assign top_level_toc = chapters_sorted | where_exp: "c", "c.parent == nil and c.grand_parent == nil" | sort: "nav_order" %}
-  {% for top in top_level_toc %}
-  {% unless top.nav_exclude %}
-  {% if top.parent == nil and top.grand_parent == nil %}
-    * [{{ top.title }}](#{{ top.title | slugify }})
-    {% assign children = chapters_sorted | where: "parent", top.title | sort: "nav_order" %}
-    {% if children.size > 0 %}
-    {% for child in children %}
-    {% unless child.nav_exclude %}
-      * [{{ child.title }}](#{{ child.title | slugify }})
-      {% assign grands = chapters_sorted | where: "parent", child.title | sort: "nav_order" %}
-      {% if grands.size > 0 %}
-      {% for g in grands %}
-      {% unless g.nav_exclude %}
-        * [{{ g.title }}](#{{ g.title | slugify }})
-      {% endunless %}
-      {% endfor %}
+<section class="pdf-toc">
+  <h1>Table of Contents</h1>
+  {% assign chapters_sorted = site.chapters | where_exp: "c", "c.nav_exclude != true" | sort: "nav_order" %}
+  {% assign top_level_toc = chapters_sorted | where_exp: "c", "c.parent == nil and c.grand_parent == nil" %}
+  <ul>
+    {% for top in top_level_toc %}
+    <li>
+      <a href="#{{ top.slug | default: top.title | slugify }}">{{ top.title }}</a>
+      {% assign children = chapters_sorted | where: "parent", top.title %}
+      {% if children.size > 0 %}
+      <ul>
+        {% for child in children %}
+        <li>
+          <a href="#{{ child.slug | default: child.title | slugify }}">{{ child.title }}</a>
+          {% assign grands = chapters_sorted | where: "parent", child.title %}
+          {% if grands.size > 0 %}
+          <ul>
+            {% for g in grands %}
+            <li><a href="#{{ g.slug | default: g.title | slugify }}">{{ g.title }}</a></li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
       {% endif %}
-    {% endunless %}
+    </li>
     {% endfor %}
-    {% endif %}
-  {% endif %}
-  {% endunless %}
-  {% endfor %}
-  </section>
+  </ul>
 </section>
 
 <section class="pdf-body">
+  {% for top in top_level_toc %}
+  <article id="{{ top.slug | default: top.title | slugify }}" class="pdf-chapter">
+    <h1>{{ top.title }}</h1>
+    {{ top.content }}
+    <div class="report-disclaimer"><p><em>{{ site.disclaimer }}</em></p></div>
+  </article>
 
-<!-- ===================================================== -->
-<!-- MAIN REPORT -->
-<!-- ===================================================== -->
-{% assign chapters_all = site.chapters | where_exp: "c", "c.nav_exclude != true" %}
+  {% assign children = chapters_sorted | where: "parent", top.title %}
+  {% for child in children %}
+  <article id="{{ child.slug | default: child.title | slugify }}" class="pdf-chapter pdf-subchapter">
+    <h2>{{ child.title }}</h2>
+    {{ child.content }}
+    <div class="report-disclaimer"><p><em>{{ site.disclaimer }}</em></p></div>
+  </article>
 
-{% assign top_level = chapters_all | where_exp: "c", "c.parent == nil and c.grand_parent == nil" | sort: "nav_order" %}
-
-{% for top in top_level %}
-<section id="{{ top.slug | default: top.title | slugify }}" class="pdf-chapter">
-  <h1>{{ top.title }}</h1>
-  {{ top.content }}
-  <div class="report-disclaimer"><p><em>{{ site.disclaimer }}</em></p></div>
+  {% assign grands = chapters_sorted | where: "parent", child.title %}
+  {% for g in grands %}
+  <article id="{{ g.slug | default: g.title | slugify }}" class="pdf-chapter pdf-subchapter">
+    <h3>{{ g.title }}</h3>
+    {{ g.content }}
+    <div class="report-disclaimer"><p><em>{{ site.disclaimer }}</em></p></div>
+  </article>
+  {% endfor %}
+  
+  {% endfor %}
+  {% endfor %}
 </section>
-<div class="page-break"></div>
 
-{% assign children = chapters_all | where: "parent", top.title | sort: "nav_order" %}
-{% for child in children %}
-<section id="{{ child.slug | default: child.title | slugify }}" class="pdf-chapter pdf-subchapter">
-  <h1>{{ child.title }}</h1>
-  {{ child.content }}
-  <div class="report-disclaimer"><p><em>{{ site.disclaimer }}</em></p></div>
-</section>
-<div class="page-break"></div>
-
-{% assign grands = chapters_all | where: "parent", child.title | sort: "nav_order" %}
-{% for g in grands %}
-<section id="{{ g.slug | default: g.title | slugify }}" class="pdf-chapter pdf-subchapter">
-  <h1>{{ g.title }}</h1>
-  {{ g.content }}
-  <div class="report-disclaimer"><p><em>{{ site.disclaimer }}</em></p></div>
-</section>
-<div class="page-break"></div>
-{% endfor %}
-{% endfor %}
-{% endfor %}
-
-</div>
-
-</section>
+<section class="pdf-cover-back"></section>
