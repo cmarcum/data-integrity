@@ -26,5 +26,7 @@ Funding support for this project was provided by *Funders for the Future of Publ
 > 
 > Special thanks are also owed to Janet Freilich for sharing code with the author.
 
+*Recommended Citation* :
+> Marcum, Christopher Steven. 2026. "The Integrity of Public Access to Federal Data: Evaluating Disruptions to Open Government Data, 2025-2026." DOI: https://www.doi.org/10.5281/zenodo.19556076 
   
 ---
