@@ -17,9 +17,14 @@ The Integrity of Public Access to Federal Data © 2026 by Christopher Steven Mar
 Funding support for this project was provided by *Funders for the Future of Public Data (3FPD)*.
 
 {:.text-center}
-<br><small>*Acknowledgments* : The author is grateful to the following people for their reviews which improved this report: 
+<br>
+*Acknowledgments* :
+> The author is grateful to the following people for their reviews which improved this report: 
  Claire McKay Bowen, Andrew Gerard, Hyon Kim, Daniel A. Lee, Jacob Pasner, Meghan Stuessy, and two additional anonymous reviewers.
- <br> <br> The author is also grateful to the many people who provided insights into the federal data landscape through anonymous interviews and conversations in support of this project. 
- <br> <br> Special thanks are also owed to Janet Freilich for sharing code with the author.
-  </small>
+> 
+> The author is also grateful to the many people who provided insights into the federal data landscape through anonymous interviews and conversations in support of this project. 
+> 
+> Special thanks are also owed to Janet Freilich for sharing code with the author.
+
+  
 ---
