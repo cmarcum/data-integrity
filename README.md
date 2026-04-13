@@ -1,5 +1,6 @@
 # The Integrity of Public Access to Federal Data
 **Evaluating Disruptions to Open Government Data, 2025-2026**
+
 [![DOI](https://zenodo.org/badge/1130583591.svg)](https://doi.org/10.5281/zenodo.19559527)
 
 This repository contains the source code, raw data, and the complete text for a report evaluating the state of open government data and the impacts of administrative disruptions between 2025 and 2026. The report is not yet finalized and is currently in-revision and under-review. 
