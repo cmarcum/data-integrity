@@ -22,6 +22,6 @@ title_color: "#ffffff"
 [Copyright and Acknowledgments]({{ site.baseurl }}/copyright/)
 
 {: .text-center}
-[Printable Version](https://www.doi.org/10.5281/zenodo.19556076)
+[Printable Version](https://zenodo.org/records/19556076/files/marcum-federal-data-integrity.pdf?download=1)
 
 ---
