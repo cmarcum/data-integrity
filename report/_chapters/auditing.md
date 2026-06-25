@@ -3,9 +3,9 @@ title: Auditing Open Government Data Assets
 nav_order: 60
 ---
 
-This chapter outlines a reproducible process for auditing metadata and dataset changes of an agency's Data.gov harvest source and/or its comprehensive data inventory and individual data files. Additionally, non-inventoried information collection requests (IRCs) subject to the Paperwork Reduction Act (PRA) processes are also considered. The process makes use of several external resources, especially the Internet Archive's [Wayback Machine](https://web.archive.org/) (WBM) to (re)establish historical baselines should they not exist. The workflow relies on a set of convenience functions written in python that provides an audit package for federal open government data (mainly, [datagov-audit.py](https://www.github.com/cmarcum/data-integrity/tree/main/code/datagov-audit.py) and the [pra-icr-tools](https://www.github.com/cmarcum/pra-icr-tools/) package).
+This chapter outlines a reproducible process for auditing metadata and dataset changes of an agency's Data.gov harvest source and/or its comprehensive data inventory and individual data files. Additionally, non-inventoried information collection requests (ICRs) subject to the Paperwork Reduction Act (PRA) processes are also considered. The process makes use of several external resources, especially the Internet Archive's [Wayback Machine](https://web.archive.org/) (WBM) to (re)establish historical baselines should they not exist. The workflow relies on a set of convenience functions written in python that provides an audit package for federal open government data (mainly, [datagov-audit.py](https://www.github.com/cmarcum/data-integrity/tree/main/code/datagov-audit.py) and the [pra-icr-tools](https://www.github.com/cmarcum/pra-icr-tools/) package).
 
-The entire workflow is described by the diagram, which outlines a temporal system designed to track changes to open government data. The workflow begins by establishing a baseline, referred to as T0, and comparing it against subsequent monitoring runs, or Tn, to detect content drift, link rot, metadata alterations, and availability issues. The workflow pulls metadata references from Data.gov, the specific agency's inventory, and (optionally) from the WBM. Nodes in the diagram prefixed with "CLI" (short for command-line interface) indicate specific helper functions provided by datagov-audit.py; for example, the workflow's list-harvest node is executed by the list-harvest CLI to enumerate active Data.gov streams. Similarly, the snapshot-org node utilizes the snapshot-org CLI to capture the raw Data.gov catalog of a specific agency, while the fetch-datajson node relies on the fetch-datajson CLI to download harvest sources from an agency. More details about Data.gov, including its limitations for monitoring changes to underlying datasets, are described in the [chapter on the Federal Data Catalog (FDC)]({{ site.baseurl }}/chapters/catalog/). Parts of this this workflow is similar to that used by Freilich & Kesselheim {% cite freilich2025lancet -A %} in their forensic study of HHS data and metadata in early 2025.
+The entire workflow is described by the diagram, which outlines a temporal system designed to track changes to open government data. The workflow begins by establishing a baseline, referred to as T0, and comparing it against subsequent monitoring runs, or Tn, to detect content drift, link rot, metadata alterations, and availability issues. The workflow pulls metadata references from Data.gov, the specific agency's inventory, and (optionally) from the WBM. Nodes in the diagram prefixed with "CLI" (short for command-line interface) indicate specific helper functions provided by datagov-audit.py; for example, the workflow's list-harvest node is executed by the list-harvest CLI to enumerate active Data.gov streams. Similarly, the snapshot-org node utilizes the snapshot-org CLI to capture the raw Data.gov catalog of a specific agency, while the fetch-datajson node relies on the fetch-datajson CLI to download harvest sources from an agency. More details about Data.gov, including its limitations for monitoring changes to underlying datasets, are described in the [chapter on the Federal Data Catalog (FDC)]({{ site.baseurl }}/chapters/catalog/). Parts of this workflow are similar to the one used by Freilich & Kesselheim {% cite freilich2025lancet -A %} in their forensic study of HHS data and metadata in early 2025.
 
 {% capture figpath1 %}{{ site.baseurl }}/assets/images/mermaid_datagov_diff.png{% endcapture %}
 {% include figure.md src=figpath1 alt="Mermaid.js auditing workflow" caption="Figure: Workflow for Auditing Open Government Data Assets and Information Collections" %}
@@ -16,7 +16,7 @@ When monitoring specific data distributions, such as CSV or JSON files, the work
 
 At the core of this monitoring system is the Diff Engine node, which is responsible for comparing the T0 baseline against the Tn run to quantify  changes. For comparing Data.gov CKAN metadata over time, the workflow maps to the script's diff CLI. Conversely, diffing the agency's internal data.json files over time is handled by the diff-inventory CLI. The generation of human-readable dataset dossiers and change logs from these comparisons is managed by the inspect-diff CLI, which iterates through the diff engine's output to reveal exact, field-level modifications.
 
-Alongside the time-series Diff Engine, the workflow includes cross-check CLI, which compares two files from the exact same monitoring run (Tn): the agency's live data.json and Data.gov's live CKAN snapshot. By extracting and matching identifiers across the two different schemas, the cross-check CLI reports out whether the FDC has injested the current version of the agency harvest source. This report feeds directly into the final outputs, revealing datasets the agency published but Data.gov failed to harvest.  Ghost records lingering on Data.gov that the agency has already removed are also returned in this step (such as was the case for several months with more than 2000 datasets previously provided by the [United States Agency for International Development]({{ site.baseurl }}/chapters/usaid.md)).
+Alongside the time-series Diff Engine, the workflow includes cross-check CLI, which compares two files from the exact same monitoring run (Tn): the agency's live data.json and Data.gov's live CKAN snapshot. By extracting and matching identifiers across the two different schemas, the cross-check CLI reports out whether the FDC has ingested the current version of the agency harvest source. This report feeds directly into the final outputs, revealing datasets the agency published but Data.gov failed to harvest.  Ghost records lingering on Data.gov that the agency has already removed are also returned in this step (such as was the case for several months with more than 2000 datasets previously provided by the [United States Agency for International Development]({{ site.baseurl }}/chapters/usaid.md)).
 
 ### FDC Harvest Sources
 
@@ -115,7 +115,7 @@ with open("snapshots.csv", "w") as f:
 ```
 For one auditing run, the resulting list of URLs was saved in [snapshots_datagov-01012026.csv](https://www.github.com/cmarcum/data-integrity/tree/main/data/snapshots_datagov-01012026.csv).
 
-From the April 2023 to the December 2025 snapshots, the number of datasets can be extract from the snapshot html. Presumably, this will work on contemporaneous (live) versions of data.gov, assuming that GSA does not make updates to the landing page structure after the date of publication of this project:
+From the April 2023 to the December 2025 snapshots, the number of datasets can be extracted from the snapshot html. Presumably, this will work on contemporaneous (live) versions of data.gov, assuming that GSA does not make updates to the landing page structure after the date of publication of this project:
 
 ```python 
 import csv, requests, re
@@ -146,7 +146,7 @@ Finally, in addition to direct monitoring of open government data assets from th
 
 ## What the routine misses
 
-The auditing routine relies on catalogs of information related to federal data assets, including the Federal Data Catalog provided by Data.gov, agency comprehensive data inventories, and the inventory of information collection requests provided by reginfo.gov (or alternatively by dataindex.us). The workflow does not consider, however, non-inventoried sets of data that may be available to the public on discrete agency websites. For instance, the non-inventoried data assets that are publicly accessible via download from the [PEPVAR](https://data.pepfar.gov/datasets) website would not be captured in the process. However, since the WBM crawls most publicly accessible federal websites, it should be possible to monitor tracking and changes using the WBM CLI tools/steps.
+The auditing routine relies on catalogs of information related to federal data assets, including the Federal Data Catalog provided by Data.gov, agency comprehensive data inventories, and the inventory of information collection requests provided by reginfo.gov (or alternatively by dataindex.us). The workflow does not consider, however, non-inventoried sets of data that may be available to the public on discrete agency websites. For instance, the non-inventoried data assets that are publicly accessible via download from the [PEPFAR](https://data.pepfar.gov/datasets) website would not be captured in the process. However, since the WBM crawls most publicly accessible federal websites, it should be possible to monitor tracking and changes using the WBM CLI tools/steps.
 
 The workflow could be modified to accommodate these edge-cases by adding a sub-routine that:
 - inputs a list of websites that have data assets available for download
@@ -210,7 +210,7 @@ Search the master list you just downloaded to verify the EPA Pasteur metadata so
 ```bash
 python datagov-audit.py find-datajson harvest_sources.json pasteur.epa.gov
 ```
-Which find the harvest source for epa's ScienceHub and reports the entry to the terminal:
+Which finds the harvest source for epa's ScienceHub and reports the entry to the terminal:
 
 ```bash
 [
@@ -227,7 +227,7 @@ Which find the harvest source for epa's ScienceHub and reports the entry to the 
 
 ## Step 3: Grab Live Version of Harvest Source Data Inventory
 
-Download and validate the current, live metadata inventory directly from the EPA. The datagov audit scripts provide a convience function for wrapping the CURL call to download the file from the agency website. This serves as the 'current' or 'new' file for comparison.
+Download and validate the current, live metadata inventory directly from the EPA. The datagov audit scripts provide a convenience function for wrapping the CURL call to download the file from the agency website. This serves as the 'current' or 'new' file for comparison.
 
 ```bash
 python datagov-audit.py fetch-datajson https://pasteur.epa.gov/metadata.json --out epa-pasteur-metadata.json
@@ -267,7 +267,7 @@ The datagov-audit script contains a useful differencing engine that can be used 
 python datagov-audit.py diff-inventory pasteur-wbm-20250105-metadata.json epa-pasteur-metadata.json --out pasteur-compare-diff.json
 ```
 
-In addition to a machine-readable json list of added, removed, and modified datasets, the function prints a high-level summary to the termina:
+In addition to a machine-readable json list of added, removed, and modified datasets, the function prints a high-level summary to the terminal:
 
 ```bash
 {
@@ -338,7 +338,7 @@ In this specific case, the underlying data have not been modified and the output
 }
 ```
 
-This routine could easily be extended to recursively iterate over a set of datasets. Of course, diligence to assess the fidelity of all federal data assets by a single entity would be infeasible but stakeholders with special interests in specific datasets could be done with some regularity. 
+This routine could easily be extended to recursively iterate over a set of datasets. Of course, diligence to assess the fidelity of all federal data assets by a single entity would be infeasible but for stakeholders with special interests in specific datasets assessments could be done with some regularity. 
 
 ---
 
@@ -350,7 +350,7 @@ Finally, verify that Data.gov's harvester has successfully ingested the agency's
 python datagov-audit.py snapshot-source "04b59eaf-ae53-4066-93db-80f2ed0df446" --out datagov-pasteur-snapshot.json
 ```
 
-Running this function periodically will provide a mechanism to establish new baselines directly from what Data.gov injests and uses in the Federal Data Catalog. Two such instances can be compared using the `diff` command, or they can be to ensure Data.gov stays in sync with the EPA's live file. 
+Running this function periodically will provide a mechanism to establish new baselines directly from what Data.gov ingests and uses in the Federal Data Catalog. Two such instances can be compared using the `diff` command, or they can be to ensure Data.gov stays in sync with the EPA's live file. 
 
 Two such snapshots can also be compared using the diff-inventory and inspect-diff functions, but with minor argument changes to ensure the json field mappings are comparable:
 
@@ -375,7 +375,7 @@ python datagov-audit.py cross-check epa-pasteur-metadata.json datagov-pasteur-sn
 
 In this case, one dataset appears in the FDC that is not in the agency inventory, and that's because there was a one-day difference between the time the two files were downloaded (with the Data.gov version being more recent). That dataset was added on 3/2/2026: [Assessing Flooding from Changes in Extreme Rainfall: Using the Design Rainfall Approach in Hydrologic Modeling](https://doi.org/10.23719/1532191). No datasets appear to be missing. 
 
-However, some changes did occur. A closer inspection by looking at the difference in the names of the data assets reveals that were five additional entries that appear in the WBM archive of the EPA comprehensive data inventory that do not appear in the version live as of 1/1/2025. These are: 
+However, some changes did occur. A closer inspection by looking at the difference in the names of the data assets reveals that there were five additional entries that appear in the WBM archive of the EPA comprehensive data inventory that do not appear in the version live as of 1/1/2025. These are: 
 
 - _EnviroAtlas - 2010 Dasymetric Population for the Conterminous United States v3 (In Review)_
 - _Chironomid nitrogen stable isotope data for NARS 2007, 2008, and 2009 surveys_
